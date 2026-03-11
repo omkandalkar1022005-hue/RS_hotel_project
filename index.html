@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hotel Royal Stay</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins', sans-serif;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364,#000000);
+    color:white;
+}
+
+/* PREMIUM NAVBAR */
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background: linear-gradient(90deg, #1a1a1a, #2d2d2d);
+    border-bottom:2px solid #ffd700;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* LOGO */
+.logo{
+    font-family:'Cinzel', serif;
+    font-size:24px;
+    font-weight:900;
+    color:#ffd700;
+    text-shadow:0 0 10px rgba(255,215,0,0.5);
+}
+
+.logo small{
+    font-size:14px;
+    color:#fff;
+    display: block;
+    font-family:'Poppins', sans-serif;
+}
+
+/* MENU */
+.menu{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:30px;
+    flex-wrap: wrap;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#fff;
+    font-weight:600;
+    font-size:16px;
+    position:relative;
+    transition:0.3s;
+    padding:5px 0;
+}
+
+.menu a:hover{
+    color:#ffd700;
+}
+
+/* Underline Animation */
+.menu a::after{
+    content:"";
+    position:absolute;
+    width:0%;
+    height:2px;
+    background:#ffd700;
+    left:0;
+    bottom:-2px;
+    transition:0.4s;
+}
+
+.menu a:hover::after{
+    width:100%;
+}
+
+/* USER SECTION */
+.user-section{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#loginBtn{
+    padding:8px 20px;
+    background:#ffd700;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    font-weight:600;
+    transition:0.3s;
+}
+
+#loginBtn:hover{
+    transform:scale(1.05);
+    background:#ffaa00;
+}
+
+#userProfile{
+    position: relative;
+    cursor: pointer;
+}
+
+#userAvatar{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    border:2px solid #ffd700;
+    transition:0.3s;
+}
+
+#userAvatar:hover{
+    transform:scale(1.1);
+}
+
+#userMenu{
+    position:absolute;
+    right:0;
+    top:60px;
+    background:white;
+    color:black;
+    padding:15px;
+    border-radius:10px;
+    min-width:200px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.3);
+    z-index:1000;
+}
+
+/* HERO */
+.hero{
+    height:70vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+    url("https://images.unsplash.com/photo-1551882547-ff40c63fe5fa");
+    background-size:cover;
+}
+
+.hero h1{
+    font-family:'Cinzel', serif;
+    font-size:65px;
+    background:linear-gradient(90deg,#ffd700,#ffffff,#ffd700);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    font-size:22px;
+    margin-top:20px;
+}
+
+/* BOOK NOW SECTION */
+.book-section{
+    height:45vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    background:linear-gradient(135deg,#e89786,#b9e8cd,#e978dd);
+    background-size:400% 400%;
+    animation:gradientBG 6s ease infinite;
+}
+
+.book-section h2{
+    font-family:'Cinzel', serif;
+    color: #2c5364;
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.cashback{
+    font-size:28px;
+    color:#0f0f0e;
+    font-weight:bold;
+    margin-bottom:20px;
+    animation:pulse 1.5s infinite;
+}
+
+.book-section button{
+    padding:18px 55px;
+    font-size:18px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(90deg,#000,#444);
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.4s;
+}
+
+.book-section button:hover{
+    transform:scale(1.1);
+    background:#ffd700;
+    color:black;
+}
+
+/* SLIDER */
+.slider-container{
+    margin:60px auto;
+    width:80%;
+}
+
+.slider{
+    position:relative;
+    height:400px;
+    margin-bottom:40px;
+    overflow:hidden;
+    border-radius:20px;
+    box-shadow:0 0 25px rgba(255,215,0,0.3);
+}
+
+.slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0;
+    transition:1s;
+}
+
+.slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.caption{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    background:rgba(0,0,0,0.7);
+    padding:15px;
+    text-align:center;
+    font-weight:bold;
+    color:#ffd700;
+}
+
+.active{
+    opacity:1;
+}
+
+/* FOOTER */
+.footer{
+    background:#edeeef;
+    padding:40px;
+    text-align:center;
+    color:#000;
+}
+
+.footer-content{
+    display:flex;
+    color: #000;
+    text-align: center;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.footer h1{
+    text-align: center;
+    color:#f82c2c;
+}
+
+.follow{
+    width:100%;
+    text-align:center;
+    margin-top:30px;
+}
+
+.follow h2{
+    color:#000;
+}
+
+.social{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:15px;
+}
+
+.social a{
+    color:#060101;  
+    font-size:25px;
+    transition:0.3s;
+}
+
+.social a:hover{
+    color:#ffd700;
+    transform:scale(1.3);
+}
+
+.floating-call, .floating-map{
+    position:fixed;
+    right:20px;
+    width:50px;
+    height:50px;
+    color:white;
+    border-radius:50%;
+    text-align:center;
+    line-height:50px;
+    font-size:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+    z-index:1000;
+    transition:0.3s;
+}
+
+.floating-call{
+    bottom:100px;
+    background:#0a9030;
+}
+
+.floating-map{
+    bottom:30px;
+    background:#dc3545;
+}
+
+.floating-call:hover, .floating-map:hover{
+    transform:scale(1.1);
+}
+
+/* Login Modal */
+#loginModal{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content{
+    background: white;
+    width: 400px;
+    padding: 40px;
+    border-radius: 20px;
+    position: relative;
+    animation: modalPop 0.3s;
+    max-width: 90%;
+}
+
+.close-btn{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.close-btn:hover{
+    color: #000;
+}
+
+/* Chat Styles */
+#chatButton{
+    position: fixed;
+    bottom: 180px;
+    right: 20px;
+    z-index: 2000;
+}
+
+.chat-btn{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #007bff;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s;
+}
+
+.chat-btn:hover{
+    transform: scale(1.1);
+}
+
+#chatWindow{
+    display: none;
+    position: fixed;
+    bottom: 250px;
+    right: 20px;
+    width: 350px;
+    height: 500px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+    z-index: 2000;
+    overflow: hidden;
+    animation: slideUp 0.3s;
+}
+
+/* Notification */
+#notification{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 4000;
+}
+
+/* ANIMATIONS */
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
+
+@keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes modalPop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}
+
+@keyframes typing {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar{
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .menu{
+        gap: 15px;
+    }
+    
+    .hero h1{
+        font-size: 40px;
+    }
+    
+    .book-section h2{
+        font-size: 30px;
+    }
+    
+    #chatWindow{
+        width: 300px;
+        right: 10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ========== NAVBAR ========== -->
+<div class="navbar">
+    <div class="logo">
+        HOTEL ROYAL STAY
+        <small>Feel the Class & Feel the Comfort.</small>
+    </div>
+
+    <div class="menu">
+        <a href="homepage.html">Home</a>
+        <a href="restaurant.html">Restaurant</a>
+        <a href="h_lodge.html">Lodging</a>
+        <a href="h_bar.html">Bar</a>
+        <a href="hall&lawn.html">Hall & Lawn</a>
+    </div>
+    
+    <div class="user-section">
+        <button onclick="openLoginModal()" id="loginBtn">
+            <i class="fas fa-user"></i> Login
+        </button>
+        <div id="userProfile" style="display:none;">
+            <img id="userAvatar" src="" onclick="showUserMenu()">
+            <div id="userMenu" style="display:none;">
+                <p><i class="fas fa-user"></i> <span id="userName"></span></p>
+                <p><i class="fas fa-envelope"></i> <span id="userEmail"></span></p>
+                <hr>
+                <button onclick="logout()" style="width:100%; padding:8px; background:#dc3545; color:white; border:none; border-radius:5px;">Logout</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== LOGIN MODAL ========== -->
+<div id="loginModal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        
+        <div style="text-align:center; margin-bottom:30px;">
+            <i class="fas fa-crown" style="font-size:48px; color:#ffd700;"></i>
+            <h2 style="color:#333;">Hotel Royal Stay</h2>
+        </div>
+        
+        <!-- Tab Buttons -->
+        <div style="display:flex; margin-bottom:20px;">
+            <button id="loginTab" onclick="switchTab('login')" style="flex:1; padding:10px; background:#ffd700; border:none; border-radius:10px 0 0 10px; font-weight:bold;">Login</button>
+            <button id="registerTab" onclick="switchTab('register')" style="flex:1; padding:10px; background:#f0f0f0; border:none; border-radius:0 10px 10px 0; font-weight:bold;">Register</button>
+        </div>
+        
+        <!-- Login Form -->
+        <div id="loginForm">
+            <div style="margin-bottom:15px;">
+                <label style="color:#333;">📧 Email</label>
+                <input type="email" id="loginEmail" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px;" placeholder="Enter your email">
+            </div>
+            <div style="margin-bottom:20px;">
+                <label style="color:#333;">🔒 Password</label>
+                <input type="password" id="loginPassword" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px;" placeholder="Enter your password">
+            </div>
+            <button onclick="login()" style="width:100%; padding:14px; background:linear-gradient(90deg,#ffd700,#ffaa00); border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Login Now</button>
+            <p style="text-align:center; margin-top:15px; color:#666;">
+                Forgot password? <a href="#" onclick="forgotPassword()">Reset</a>
+            </p>
+        </div>
+        
+        <!-- Register Form -->
+        <div id="registerForm" style="display:none;">
+            <div style="margin-bottom:15px;">
+                <label style="color:#333;">👤 Full Name</label>
+                <input type="text" id="regName" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px;" placeholder="Enter your name">
+            </div>
+            <div style="margin-bottom:15px;">
+                <label style="color:#333;">📧 Email</label>
+                <input type="email" id="regEmail" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px;" placeholder="Enter your email">
+            </div>
+            <div style="margin-bottom:15px;">
+                <label style="color:#333;">📱 Mobile</label>
+                <input type="tel" id="regMobile" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px;" placeholder="Enter 10 digit mobile">
+            </div>
+            <div style="margin-bottom:20px;">
+                <label style="color:#333;">🔒 Password</label>
+                <input type="password" id="regPassword" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px;" placeholder="Create password">
+            </div>
+            <button onclick="register()" style="width:100%; padding:14px; background:linear-gradient(90deg,#ffd700,#ffaa00); border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Create Account</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== HERO SECTION ========== -->
+<div class="hero">
+    <h1>Welcome to Royal Stay</h1>
+    <p>Experience Comfort • Class • Royalty • Quality</p>
+</div>
+
+<!-- ========== BOOK SECTION ========== -->
+<div class="book-section">
+    <h2>Book Your Royal Experience Now</h2>
+    <div class="cashback">🔥 Get 40% Cashback on Early Booking 🔥</div>
+    <button onclick="window.location.href='booking.html'">BOOK NOW</button>
+</div>
+
+<!-- ========== SLIDERS ========== -->
+<div class="slider-container">
+    <!-- SLIDER 1 -->
+    <div class="slider">
+        <div class="slide active">
+            <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c">
+            <div class="caption">Luxury Restaurant</div>
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330">
+            <div class="caption">Premium Bar Lounge</div>
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1560448075-bb485b067938">
+            <div class="caption">Spacious Parking Area</div>
+        </div>
+    </div>
+
+    <!-- SLIDER 2 -->
+    <div class="slider">
+        <div class="slide active">
+            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b">
+            <div class="caption">AC Banquet Hall</div>
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267">
+            <div class="caption">Conference Hall</div>
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511">
+            <div class="caption">Beautiful Lawn for Ceremony</div>
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3">
+            <div class="caption">Party & Celebration Area</div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== LIVE CHAT ========== -->
+<div id="chatButton">
+    <button class="chat-btn" onclick="toggleChat()">
+        <i class="fas fa-comment" style="font-size:24px;"></i>
+        <span id="chatBadge" style="position:absolute; top:-5px; right:-5px; background:#dc3545; color:white; width:20px; height:20px; border-radius:50%; font-size:12px; display:none;">1</span>
+    </button>
+</div>
+
+<!-- Chat Window -->
+<div id="chatWindow">
+    <!-- Chat Header -->
+    <div style="background:#007bff; color:white; padding:15px; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+            <i class="fas fa-headset"></i>
+            <span style="font-weight:bold; margin-left:10px;">Hotel Royal Support</span>
+        </div>
+        <div>
+            <span style="background:#28a745; width:10px; height:10px; display:inline-block; border-radius:50%;"></span>
+            <span style="margin:0 10px;">Online</span>
+            <button onclick="toggleChat()" style="background:transparent; border:none; color:white; font-size:20px; cursor:pointer;">&times;</button>
+        </div>
+    </div>
+    
+    <!-- Chat Messages -->
+    <div id="chatMessages" style="height:360px; overflow-y:auto; padding:15px; background:#f8f9fa;">
+        <div style="margin-bottom:15px; text-align:left;">
+            <img src="https://ui-avatars.com/api/?name=Support&background=007bff&color=fff" style="width:30px; height:30px; border-radius:50%; display:inline-block; margin-right:10px;">
+            <div style="display:inline-block; background:#007bff; color:white; padding:8px 15px; border-radius:15px; max-width:70%;">
+                नमस्ते! मी तुम्हाला कशी मदत करू शकतो?
+            </div>
+            <div style="font-size:10px; color:#999; margin-top:5px; margin-left:40px;">Just now</div>
+        </div>
+    </div>
+    
+    <!-- Quick Replies -->
+    <div style="padding:10px; border-top:1px solid #ddd; background:white;">
+        <div style="display:flex; gap:5px; flex-wrap:wrap; margin-bottom:10px;">
+            <button onclick="sendQuickReply('room')" style="padding:5px 10px; background:#f0f0f0; border:none; border-radius:15px; cursor:pointer;">🏨 Room Booking</button>
+            <button onclick="sendQuickReply('food')" style="padding:5px 10px; background:#f0f0f0; border:none; border-radius:15px; cursor:pointer;">🍽️ Restaurant</button>
+            <button onclick="sendQuickReply('payment')" style="padding:5px 10px; background:#f0f0f0; border:none; border-radius:15px; cursor:pointer;">💰 Payment</button>
+        </div>
+        
+        <!-- Message Input -->
+        <div style="display:flex; gap:10px;">
+            <input type="text" id="chatInput" placeholder="Type your message..." style="flex:1; padding:10px; border:1px solid #ddd; border-radius:20px; outline:none;">
+            <button onclick="sendMessage()" style="background:#007bff; color:white; border:none; width:40px; height:40px; border-radius:50%; cursor:pointer;">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<div class="footer">
+    <div class="footer-content">
+        <div>
+            <h1>Hotel Royal Stay</h1>
+            <p>Address: MG Road, Kolhapur, Maharashtra</p>
+            <p>Email: hotelroyalstay@gmail.com</p>
+            <p>Contact: +91 9876543210</p>
+            <p>Landline: 020-24567890</p>
+        </div>
+    </div>
+
+    <div class="follow">
+        <h2>Follow Us</h2>
+        <div class="social">
+            <a href="https://www.instagram.com/om____1199?igsh=ZXNtZm15aGNxZ3Rp" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://youtube.com/@omkandalkar326?si=peEW-RMoxGJrXM2g" target="_blank">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://www.facebook.com/" target="_blank">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://wa.me/8275761213" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
+    
+    <div class="copyright">
+        © 2026 Hotel Royal Stay | Luxury 3-Star Experience
+    </div>
+</div>
+
+<!-- ========== FLOATING BUTTONS ========== -->
+<a href="tel:+918275761213" class="floating-call" target="_self">
+    <i class="fas fa-phone"></i>
+</a>
+<a href="https://www.google.com/maps/place/Kolhapur+Maharashtra" class="floating-map" target="_blank">
+    <i class="fas fa-map-marker-alt"></i>
+</a>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script>
+// ========== LOGIN / REGISTER SYSTEM ==========
+let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+
+// Modal Functions
+function openLoginModal() {
+    document.getElementById('loginModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('loginModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function switchTab(tab) {
+    if(tab === 'login') {
+        document.getElementById('loginTab').style.background = '#ffd700';
+        document.getElementById('registerTab').style.background = '#f0f0f0';
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('registerForm').style.display = 'none';
+    } else {
+        document.getElementById('loginTab').style.background = '#f0f0f0';
+        document.getElementById('registerTab').style.background = '#ffd700';
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('registerForm').style.display = 'block';
+    }
+}
+
+// Register Function
+function register() {
+    let name = document.getElementById('regName').value;
+    let email = document.getElementById('regEmail').value;
+    let mobile = document.getElementById('regMobile').value;
+    let password = document.getElementById('regPassword').value;
+    
+    if(!name || !email || !mobile || !password) {
+        showNotification('कृपया सर्व माहिती भरा!', 'error');
+        return;
+    }
+    
+    if(mobile.length !== 10) {
+        showNotification('मोबाइल नंबर 10 अंकी असावा!', 'error');
+        return;
+    }
+    
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    
+    if(users.find(u => u.email === email)) {
+        showNotification('हा ईमेल आधीपासून नोंदणीकृत आहे!', 'error');
+        return;
+    }
+    
+    let newUser = {
+        id: Date.now(),
+        name: name,
+        email: email,
+        mobile: mobile,
+        password: password,
+        avatar: 'https://ui-avatars.com/api/?name=' + name + '&background=ffd700&color=000',
+        joinDate: new Date().toLocaleDateString()
+    };
+    
+    users.push(newUser);
+    localStorage.setItem('users', JSON.stringify(users));
+    
+    showNotification('नोंदणी यशस्वी! कृपया लॉगिन करा.', 'success');
+    switchTab('login');
+    
+    document.getElementById('regName').value = '';
+    document.getElementById('regEmail').value = '';
+    document.getElementById('regMobile').value = '';
+    document.getElementById('regPassword').value = '';
+}
+
+// Login Function
+function login() {
+    let email = document.getElementById('loginEmail').value;
+    let password = document.getElementById('loginPassword').value;
+    
+    if(!email || !password) {
+        showNotification('ईमेल आणि पासवर्ड भरा!', 'error');
+        return;
+    }
+    
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    let user = users.find(u => u.email === email && u.password === password);
+    
+    if(user) {
+        currentUser = user;
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        updateUIAfterLogin();
+        closeModal();
+        showNotification('स्वागत आहे ' + user.name + '!', 'success');
+    } else {
+        showNotification('ईमेल किंवा पासवर्ड चुकीचा!', 'error');
+    }
+}
+
+// Update UI after login
+function updateUIAfterLogin() {
+    if(currentUser) {
+        document.getElementById('loginBtn').style.display = 'none';
+        document.getElementById('userProfile').style.display = 'block';
+        document.getElementById('userAvatar').src = currentUser.avatar;
+        document.getElementById('userName').innerText = currentUser.name;
+        document.getElementById('userEmail').innerText = currentUser.email;
+    }
+}
+
+// Show user menu
+function showUserMenu() {
+    let menu = document.getElementById('userMenu');
+    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+}
+
+// Logout
+function logout() {
+    currentUser = null;
+    localStorage.removeItem('currentUser');
+    document.getElementById('loginBtn').style.display = 'block';
+    document.getElementById('userProfile').style.display = 'none';
+    showNotification('लॉगआउट यशस्वी!', 'info');
+}
+
+// Forgot Password
+function forgotPassword() {
+    let email = prompt('तुमचा नोंदणीकृत ईमेल प्रविष्ट करा:');
+    if(email) {
+        showNotification('पासवर्ड रीसेट लिंक तुमच्या ईमेलवर पाठवली आहे.', 'info');
+    }
+}
+
+// ========== LIVE CHAT SYSTEM ==========
+let chatVisible = false;
+
+function toggleChat() {
+    chatVisible = !chatVisible;
+    document.getElementById('chatWindow').style.display = chatVisible ? 'block' : 'none';
+    
+    if(chatVisible) {
+        document.getElementById('chatBadge').style.display = 'none';
+        loadChatHistory();
+    }
+}
+
+function sendMessage() {
+    let input = document.getElementById('chatInput');
+    let message = input.value.trim();
+    
+    if(message === '') return;
+    
+    addMessage('user', message);
+    saveMessage('user', message);
+    input.value = '';
+    
+    showTypingIndicator();
+    
+    setTimeout(() => {
+        removeTypingIndicator();
+        generateReply(message);
+    }, 1500);
+}
+
+function addMessage(sender, text) {
+    let chatDiv = document.getElementById('chatMessages');
+    let messageDiv = document.createElement('div');
+    
+    let time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    
+    if(sender === 'user') {
+        messageDiv.innerHTML = `
+            <div style="margin-bottom:15px; text-align:right;">
+                <div style="display:inline-block; background:#28a745; color:white; padding:8px 15px; border-radius:15px; max-width:70%; text-align:left;">
+                    ${text}
+                </div>
+                <div style="font-size:10px; color:#999; margin-top:5px;">${time}</div>
+            </div>
+        `;
+    } else {
+        messageDiv.innerHTML = `
+            <div style="margin-bottom:15px; text-align:left;">
+                <img src="https://ui-avatars.com/api/?name=Support&background=007bff&color=fff" style="width:30px; height:30px; border-radius:50%; display:inline-block; margin-right:10px;">
+                <div style="display:inline-block; background:#007bff; color:white; padding:8px 15px; border-radius:15px; max-width:70%;">
+                    ${text}
+                </div>
+                <div style="font-size:10px; color:#999; margin-top:5px; margin-left:40px;">${time}</div>
+            </div>
+        `;
+    }
+    
+    chatDiv.appendChild(messageDiv);
+    chatDiv.scrollTop = chatDiv.scrollHeight;
+}
+
+function showTypingIndicator() {
+    let chatDiv = document.getElementById('chatMessages');
+    let indicator = document.createElement('div');
+    indicator.id = 'typingIndicator';
+    indicator.innerHTML = `
+        <div style="margin-bottom:15px; text-align:left;">
+            <img src="https://ui-avatars.com/api/?name=Support&background=007bff&color=fff" style="width:30px; height:30px; border-radius:50%; display:inline-block; margin-right:10px;">
+            <div style="display:inline-block; background:#e9ecef; color:#666; padding:8px 15px; border-radius:15px;">
+                <i class="fas fa-circle" style="font-size:8px; margin:0 2px; animation:typing 1s infinite;"></i>
+                <i class="fas fa-circle" style="font-size:8px; margin:0 2px; animation:typing 1s infinite 0.2s;"></i>
+                <i class="fas fa-circle" style="font-size:8px; margin:0 2px; animation:typing 1s infinite 0.4s;"></i>
+            </div>
+        </div>
+    `;
+    chatDiv.appendChild(indicator);
+    chatDiv.scrollTop = chatDiv.scrollHeight;
+}
+
+function removeTypingIndicator() {
+    let indicator = document.getElementById('typingIndicator');
+    if(indicator) indicator.remove();
+}
+
+function generateReply(userMessage) {
+    let reply = '';
+    userMessage = userMessage.toLowerCase();
+    
+    if(userMessage.includes('room') || userMessage.includes('book')) {
+        reply = 'आमच्याकडे डिलक्स, एक्झिक्युटिव आणि रॉयल रूम उपलब्ध आहेत. कृपया लॉजिंग पेजवर जाऊन बुक करा.';
+    } else if(userMessage.includes('food') || userMessage.includes('restaurant')) {
+        reply = 'आमच्या रेस्टॉरंटमध्ये उत्तम जेवण उपलब्ध आहे. मेन्यू पाहण्यासाठी रेस्टॉरंट पेजवर जा.';
+    } else if(userMessage.includes('payment')) {
+        reply = 'आम्ही UPI, कार्ड आणि नेट बँकिंग स्वीकारतो. पेमेंट सुरक्षित आहे.';
+    } else if(userMessage.includes('price') || userMessage.includes('cost')) {
+        reply = 'रूमची किंमत ₹2499 ते ₹12999 पर्यंत आहे. अ‍ॅडव्हान्स बुकिंगवर 40% सूट मिळते.';
+    } else if(userMessage.includes('hello') || userMessage.includes('hi')) {
+        reply = 'नमस्ते! तुमचे Hotel Royal Stay मध्ये स्वागत आहे.';
+    } else {
+        reply = 'धन्यवाद! तुमच्या प्रश्नासाठी. आमची टीम लवकरच उत्तर देईल. 📞 +91 9876543210 वर कॉल करा.';
+    }
+    
+    addMessage('support', reply);
+    saveMessage('support', reply);
+}
+
+function sendQuickReply(type) {
+    let message = '';
+    switch(type) {
+        case 'room':
+            message = 'मला रूम बुक करायची आहे.';
+            break;
+        case 'food':
+            message = 'रेस्टॉरंट मेन्यू पाठवा.';
+            break;
+        case 'payment':
+            message = 'पेमेंट पर्याय काय आहेत?';
+            break;
+    }
+    
+    addMessage('user', message);
+    saveMessage('user', message);
+    showTypingIndicator();
+    
+    setTimeout(() => {
+        removeTypingIndicator();
+        generateReply(message);
+    }, 1000);
+}
+
+function saveMessage(sender, message) {
+    let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+    chatHistory.push({
+        sender: sender,
+        message: message,
+        time: new Date().toISOString()
+    });
+    localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+}
+
+function loadChatHistory() {
+    let chatDiv = document.getElementById('chatMessages');
+    chatDiv.innerHTML = '';
+    
+    let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+    
+    if(chatHistory.length === 0) {
+        addMessage('support', 'नमस्ते! मी तुम्हाला कशी मदत करू शकतो?');
+    } else {
+        chatHistory.forEach(msg => {
+            let time = new Date(msg.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            addMessage(msg.sender, msg.message);
+        });
+    }
+}
+
+// ========== NOTIFICATION SYSTEM ==========
+function showNotification(message, type = 'info') {
+    let existing = document.getElementById('notification');
+    if(existing) existing.remove();
+    
+    let notification = document.createElement('div');
+    notification.id = 'notification';
+    
+    let colors = {
+        success: { bg: '#28a745', icon: 'fa-check-circle' },
+        error: { bg: '#dc3545', icon: 'fa-exclamation-circle' },
+        info: { bg: '#17a2b8', icon: 'fa-info-circle' },
+        warning: { bg: '#ffc107', icon: 'fa-exclamation-triangle' }
+    };
+    
+    let color = colors[type] || colors.info;
+    
+    notification.style.cssText = `
+        background: ${color.bg};
+        color: white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        animation: slideIn 0.3s ease-out;
+        max-width: 350px;
+    `;
+    
+    notification.innerHTML = `
+        <i class="fas ${color.icon}" style="font-size: 20px;"></i>
+        <div style="flex:1;">
+            <div style="font-weight: bold; margin-bottom: 5px;">${type.toUpperCase()}</div>
+            <div style="font-size: 14px;">${message}</div>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        if(notification && notification.parentNode) {
+            notification.style.animation = 'slideOut 0.3s ease-out';
+            setTimeout(() => {
+                if(notification.parentNode) notification.remove();
+            }, 300);
+        }
+    }, 3000);
+}
+
+// ========== SLIDER ==========
+let sliders = document.querySelectorAll(".slider");
+
+sliders.forEach(slider=>{
+    let slides = slider.querySelectorAll(".slide");
+    let index = 0;
+
+    setInterval(()=>{
+        slides.forEach(s=>s.classList.remove("active"));
+        index++;
+        if(index>=slides.length){ index=0; }
+        slides[index].classList.add("active");
+    },1800);
+});
+
+// ========== OFFER NOTIFICATION ==========
+setTimeout(() => {
+    if(!localStorage.getItem('offerShown')) {
+        let notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            bottom: 120px;
+            right: 20px;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: black;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 3500;
+            width: 300px;
+            cursor: pointer;
+            animation: slideUp 0.5s;
+        `;
+        
+        notification.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <i class="fas fa-gift" style="font-size: 30px;"></i>
+                <div>
+                    <h3 style="margin: 0 0 5px 0;">Special Offer! 🔥</h3>
+                    <p style="margin: 0; font-size: 14px;">40% off on early booking!</p>
+                    <p style="margin: 5px 0 0 0; font-size: 12px;">Click to claim</p>
+                </div>
+            </div>
+        `;
+        
+        notification.onclick = function() {
+            window.location.href = 'booking.html';
+        };
+        
+        document.body.appendChild(notification);
+        localStorage.setItem('offerShown', 'true');
+        
+        setTimeout(() => {
+            if(notification.parentNode) notification.remove();
+        }, 10000);
+    }
+}, 5000);
+
+// ========== INITIALIZATION ==========
+document.addEventListener('DOMContentLoaded', function() {
+    if(currentUser) {
+        updateUIAfterLogin();
+    }
+});
+
+window.onclick = function(event) {
+    let modal = document.getElementById('loginModal');
+    if(event.target === modal) {
+        closeModal();
+    }
+    
+    // Close user menu when clicking outside
+    if(!event.target.closest('#userProfile')) {
+        document.getElementById('userMenu').style.display = 'none';
+    }
+};
+</script>
+
+</body>
+</html>

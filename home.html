@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hotel Royal Stay</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins', sans-serif;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364,#000000);
+    color:white;
+}
+
+/* NAVBAR */
+.navbar{
+    padding:20px 80px;
+    background:rgba(232, 234, 100, 0.9);
+}
+
+.logo{
+    font-family:'Cinzel', serif;
+    font-size:30px;
+    font-weight:900;
+    color:#032f1a;
+    text-align:center;
+}
+
+.menu{
+    margin-top:15px;
+    text-align:center;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#000;
+    margin:0 20px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.menu a:hover{
+    color:#d4af37;
+    border-bottom:2px solid #d4af37;
+}
+
+/* HERO */
+.hero{
+    height:70vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+    url("https://images.unsplash.com/photo-1551882547-ff40c63fe5fa");
+    background-size:cover;
+}
+
+.hero h1{
+    font-family:'Cinzel', serif;
+    font-size:65px;
+    background:linear-gradient(90deg,#ffd700,#ffffff,#ffd700);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    font-size:22px;
+    margin-top:20px;
+}
+
+/* BOOK NOW SECTION */
+.book-section{
+    height:45vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    background:linear-gradient(135deg,#e89786,#62c98d,#1fa2ff);
+    background-size:400% 400%;
+    animation:gradientBG 6s ease infinite;
+}
+
+.book-section h2{
+    font-family:'Cinzel', serif;
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.cashback{
+    font-size:28px;
+    color:#0f0f0e;
+    font-weight:bold;
+    margin-bottom:20px;
+    animation:pulse 1.5s infinite;
+}
+
+.book-section button{
+    padding:18px 55px;
+    font-size:18px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(90deg,#000,#444);
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.4s;
+}
+
+.book-section button:hover{
+    transform:scale(1.1);
+    background:#ffd700;
+    color:black;
+}
+
+/* SLIDER */
+.slider-container{
+    margin:60px auto;
+    width:80%;
+}
+
+.slider{
+    position:relative;
+    height:400px;
+    margin-bottom:40px;
+    overflow:hidden;
+    border-radius:20px;
+    box-shadow:0 0 25px rgba(228, 181, 181, 0.6);
+}
+
+.slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0;
+    transition:1s;
+}
+
+.slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.caption{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    background:rgba(5, 5, 0, 0.6);
+    padding:15px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.active{
+    opacity:1;
+}
+
+/* FOOTER */
+.footer{
+    background:#0c74af;
+    padding:40px;
+    text-align:center;
+}
+
+.footer-content{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+}
+
+.footer h3{
+    color:#ffd700;
+}
+
+.follow{
+    width:100%;
+    text-align:center;
+    margin-top:30px;
+}
+
+.social i{
+    font-size:25px;
+    margin:0 15px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.social i:hover{
+    color:#ffd700;
+    transform:scale(1.3);
+}
+
+/* ANIMATIONS */
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
+
+@keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">
+        “Feel the Class & Feel the Comfort.” <br><h1>⭐⭐⭐HOTEL ROYAL STAY ⭐⭐⭐</h1> 
+    </div>
+
+    <div class="menu">
+        <a href="home.html">Home</a>
+        <a href="restaurant.html">Restaurant</a>
+        <a href="h_lodge.html">Lodging</a>
+        <a href="h_bar.html">Bar</a>
+                <a href="h_hall.html">Hall&Lawn</a>
+
+    </div>
+</div>
+
+<div class="hero">
+    <h1>Welcome to Royal Luxury</h1>
+    <p>Experience Comfort • Class • Royalty • Quality</p>
+</div>
+
+<div class="book-section">
+    <h2>Book Your Royal Experience Now</h2>
+    <div class="cashback">🔥 Get 40% Cashback on Early Booking 🔥</div>
+    <button onclick="alert('Redirect to Booking Page')">BOOK NOW</button>
+</div>
+
+<div class="slider-container">
+
+    <!-- SLIDER 1 -->
+    <div class="slider">
+        <div class="slide active">
+            <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c">
+            <div class="caption">Luxury Restaurant</div>
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330">
+            <div class="caption">Premium Bar Lounge</div>
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1560448075-bb485b067938">
+            <div class="caption">Spacious Parking Area</div>
+        </div>
+    </div>
+
+    <!-- SLIDER 2 -->
+    <div class="slider">
+        <div class="slide active">
+            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b">
+            <div class="caption">AC Banquet Hall</div>
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267">
+            <div class="caption">Conference Hall</div>
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511">
+            <div class="caption">Beautiful Lawn for Ceremony</div>
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3">
+            <div class="caption">Party & Celebration Area</div>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    <div class="footer-content">
+        <div>
+            <h3>Hotel Royal Stay</h3>
+            <p>Address: MG Road, Kolhapur, Maharashtra</p>
+            <p>Email: hotelroyalstay@gmail.com</p>
+            <p>Contact: +91 9876543210</p>
+            <p>Landline: 020-24567890</p>
+        </div>
+    </div>
+
+    <div class="follow">
+        <h2>Follow Us</h2>
+        <div class="social">
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-youtube"></i>
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-x-twitter"></i>
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </div>
+</div>
+
+<script>
+let sliders = document.querySelectorAll(".slider");
+
+sliders.forEach(slider=>{
+    let slides = slider.querySelectorAll(".slide");
+    let index = 0;
+
+    setInterval(()=>{
+        slides.forEach(s=>s.classList.remove("active"));
+        index++;
+        if(index>=slides.length){ index=0; }
+        slides[index].classList.add("active");
+    },1800);
+});
+</script>
+
+</body>
+</html>

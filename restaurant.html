@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant | Hotel Royal Stay</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins', sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#c9ead6,#b0e17e);
+}
+
+/* PREMIUM NAVBAR */
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background: linear-gradient(90deg, #1a1a1a, #2d2d2d);
+    border-bottom: 2px solid #ffd700;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo{
+    font-family: 'Cinzel', serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255,215,0,0.5);
+}
+
+.logo small{
+    font-size: 12px;
+    color: #fff;
+    display: block;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* MENU */
+.menu{
+    display: flex;
+    gap: 30px;
+}
+
+.menu a{
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    position: relative;
+    transition: 0.3s;
+    padding: 5px 0;
+}
+
+.menu a:hover{
+    color: #ffd700;
+}
+
+.menu a::after{
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #ffd700;
+    left: 0;
+    bottom: -2px;
+    transition: 0.4s;
+}
+
+.menu a:hover::after{
+    width: 100%;
+}
+
+/* USER SECTION */
+.user-section{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#loginBtn{
+    padding: 8px 20px;
+    background: #ffd700;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+#loginBtn:hover{
+    transform: scale(1.05);
+    background: #ffaa00;
+}
+
+#userProfile{
+    position: relative;
+    cursor: pointer;
+}
+
+#userAvatar{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid #ffd700;
+    transition: 0.3s;
+}
+
+#userAvatar:hover{
+    transform: scale(1.1);
+}
+
+#userMenu{
+    position: absolute;
+    right: 0;
+    top: 60px;
+    background: white;
+    color: black;
+    padding: 15px;
+    border-radius: 10px;
+    min-width: 200px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+/* SECTION TITLE */
+.section-title{
+    text-align: center;
+    margin: 30px 0;
+    font-size: 32px;
+    font-family: 'Cinzel', serif;
+    color: #333;
+}
+
+/* MENU CONTAINER */
+.menu-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 20px 40px;
+}
+
+.menu-item{
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.menu-item:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.menu-item img{
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #ffd700;
+}
+
+.price{
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 20px;
+    color: #28a745;
+}
+
+.qty{
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.order-btn{
+    margin-top: 10px;
+    padding: 8px 25px;
+    border: none;
+    background: linear-gradient(45deg, #ffcc00, #ff6600);
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+    color: white;
+}
+
+.order-btn:hover{
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255,102,0,0.4);
+}
+
+/* ORDER BOX */
+.order-box{
+    background: #1a1a1a;
+    color: white;
+    margin: 30px 50px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.bill-details{
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 15px 0;
+    min-height: 100px;
+}
+
+.payment-section{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.payment-label{
+    color: #ffd700;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#paymentMode{
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #ffd700;
+    background: white;
+    font-size: 14px;
+    cursor: pointer;
+    width: 200px;
+}
+
+.button-group{
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.pay-btn{
+    padding: 10px 30px;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    background: linear-gradient(90deg, #00c853, #64dd17);
+    color: white;
+    min-width: 150px;
+}
+
+.bill-btn{
+    padding: 10px 30px;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    background: linear-gradient(90deg, #ff9800, #ff5722);
+    color: white;
+    min-width: 150px;
+}
+
+.pay-btn:hover, .bill-btn:hover{
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+
+/* FOOTER */
+.footer{
+    background: #edeeef;
+    padding: 40px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.footer-content{
+    display: flex;
+    justify-content: center;
+    color: #000;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.footer h1{
+    color: #f91c1c;
+    margin-bottom: 15px;
+    font-family: 'Cinzel', serif;
+}
+
+.follow{
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.follow h2{
+    color: #000;
+}
+
+.social{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.social a{
+    color: #060101;
+    font-size: 25px;
+    transition: 0.3s;
+}
+
+.social a:hover{
+    color: #ffd700;
+    transform: scale(1.3);
+}
+
+/* FLOATING BUTTONS */
+.floating-call, .floating-map{
+    position: fixed;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: 0.3s;
+}
+
+.floating-call{
+    bottom: 100px;
+    background: #0a9030;
+}
+
+.floating-map{
+    bottom: 30px;
+    background: #dc3545;
+}
+
+.floating-call:hover, .floating-map:hover{
+    transform: scale(1.1);
+}
+
+.copyright{
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(13, 1, 1, 0.1);
+    color: #130c0c;
+    font-size: 14px;
+}
+
+/* LOGIN MODAL */
+#loginModal{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content{
+    background: white;
+    width: 400px;
+    padding: 40px;
+    border-radius: 20px;
+    position: relative;
+    animation: modalPop 0.3s;
+    max-width: 90%;
+}
+
+.close-btn{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.close-btn:hover{
+    color: #000;
+}
+
+/* CHAT BUTTON */
+#chatButton{
+    position: fixed;
+    bottom: 180px;
+    right: 20px;
+    z-index: 2000;
+}
+
+.chat-btn{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #007bff;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s;
+}
+
+.chat-btn:hover{
+    transform: scale(1.1);
+}
+
+/* CHAT WINDOW */
+#chatWindow{
+    display: none;
+    position: fixed;
+    bottom: 250px;
+    right: 20px;
+    width: 350px;
+    height: 500px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+    z-index: 2000;
+    overflow: hidden;
+    animation: slideUp 0.3s;
+}
+
+.chat-header{
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-messages{
+    height: 360px;
+    overflow-y: auto;
+    padding: 15px;
+    background: #f8f9fa;
+}
+
+.chat-footer{
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background: white;
+}
+
+/* NOTIFICATION */
+#notification{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 4000;
+}
+
+/* ANIMATIONS */
+@keyframes modalPop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}
+
+@keyframes typing {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .navbar{
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .menu{
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .menu a{
+        font-size: 14px;
+    }
+    
+    .order-box{
+        margin: 20px;
+        padding: 20px;
+    }
+    
+    .payment-section{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    #paymentMode{
+        width: 100%;
+    }
+    
+    #chatWindow{
+        width: 300px;
+        right: 10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ========== NAVBAR ========== -->
+<div class="navbar">
+    <div class="logo">
+        HOTEL ROYAL STAY
+        <small>Feel the Class & Feel the Comfort.</small>
+    </div>
+
+    <div class="menu">
+        <a href="homepage.html">Home</a>
+        <a href="restaurant.html">Restaurant</a>
+        <a href="h_lodge.html">Lodging</a>
+        <a href="h_bar.html">Bar</a>
+        <a href="hall&lawn.html">Hall & Lawn</a>
+    </div>
+    
+    <div class="user-section">
+        <button onclick="openLoginModal()" id="loginBtn">
+            <i class="fas fa-user"></i> Login
+        </button>
+        <div id="userProfile" style="display:none;">
+            <img id="userAvatar" src="" onclick="showUserMenu()">
+            <div id="userMenu" style="display:none;">
+                <p><i class="fas fa-user"></i> <span id="userName"></span></p>
+                <p><i class="fas fa-envelope"></i> <span id="userEmail"></span></p>
+                <hr>
+                <button onclick="logout()" style="width:100%; padding:8px; background:#dc3545; color:white; border:none; border-radius:5px;">Logout</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== LOGIN MODAL ========== -->
+<div id="loginModal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        
+        <div style="text-align:center; margin-bottom:30px;">
+            <i class="fas fa-crown" style="font-size:48px; color:#ffd700;"></i>
+            <h2 style="color:#333;">Hotel Royal Stay</h2>
+        </div>
+        
+        <!-- Tab Buttons -->
+        <div style="display:flex; margin-bottom:20px;">
+            <button id="loginTab" onclick="switchTab('login')" style="flex:1; padding:10px; background:#ffd700; border:none; border-radius:10px 0 0 10px; font-weight:bold;">Login</button>
+            <button id="registerTab" onclick="switchTab('register')" style="flex:1; padding:10px; background:#f0f0f0; border:none; border-radius:0 10px 10px 0; font-weight:bold;">Register</button>
+        </div>
+        
+        <!-- Login Form -->
+        <div id="loginForm">
+            <div style="margin-bottom:15px;">
+                <label style="color:#333;">📧 Email</label>
+                <input type="email" id="loginEmail" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px;" placeholder="Enter your email">
+            </div>
+            <div style="margin-bottom:20px;">
+                <label style="color:#333;">🔒 Password</label>
+                <input type="password" id="loginPassword" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px;" placeholder="Enter your password">
+            </div>
+            <button onclick="login()" style="width:100%; padding:14px; background:linear-gradient(90deg,#ffd700,#ffaa00); border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Login Now</button>
+            <p style="text-align:center; margin-top:15px; color:#666;">
+                Forgot password? <a href="#" onclick="forgotPassword()">Reset</a>
+            </p>
+        </div>
+        
+        <!-- Register Form -->
+        <div id="registerForm" style="display:none;">
+            <div style="margin-bottom:15px;">
+                <label style="color:#333;">👤 Full Name</label>
+                <input type="text" id="regName" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px;" placeholder="Enter your name">
+            </div>
+            <div style="margin-bottom:15px;">
+                <label style="color:#333;">📧 Email</label>
+                <input type="email" id="regEmail" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px;" placeholder="Enter your email">
+            </div>
+            <div style="margin-bottom:15px;">
+                <label style="color:#333;">📱 Mobile</label>
+                <input type="tel" id="regMobile" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px;" placeholder="Enter 10 digit mobile">
+            </div>
+            <div style="margin-bottom:20px;">
+                <label style="color:#333;">🔒 Password</label>
+                <input type="password" id="regPassword" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px;" placeholder="Create password">
+            </div>
+            <button onclick="register()" style="width:100%; padding:14px; background:linear-gradient(90deg,#ffd700,#ffaa00); border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Create Account</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== PAGE HEADER ========== -->
+<!-- <header> काढून टाकला कारण आता navbar आहे -->
+
+<!-- ========== MENU (दुसरा मेनू काढून टाकला) ========== -->
+
+<h2 class="section-title">🥗 Our Special Dishes 🥗</h2>
+
+<!-- ========== FOOD CONTAINER ========== -->
+<div class="menu-container" id="foodContainer"></div>
+
+<!-- ========== ORDER BOX ========== -->
+<div class="order-box">
+    <h2 style="text-align:center;">🧾 Your Order Details</h2>
+    <div class="bill-details" id="orderDetails">
+        No items ordered yet.
+    </div>
+    <h3 id="total" style="text-align:center; color:#ffd700;">Total: ₹0</h3>
+
+    <div class="payment-section">
+        <span class="payment-label">💳 Payment Mode:</span>
+        <select id="paymentMode">
+            <option value="UPI">📱 UPI</option>
+            <option value="Card">💳 Card</option>
+            <option value="Net Banking">🏦 Net Banking</option>
+        </select>
+    </div>
+
+    <div class="button-group">
+        <button onclick="payNow()" class="pay-btn">
+            <i class="fas fa-check-circle"></i> Pay Now
+        </button>
+        <button onclick="downloadPDF()" class="bill-btn">
+            <i class="fas fa-file-pdf"></i> Download Bill
+        </button>
+    </div>
+</div>
+
+<!-- ========== LIVE CHAT ========== -->
+<div id="chatButton">
+    <button class="chat-btn" onclick="toggleChat()">
+        <i class="fas fa-comment"></i>
+        <span id="chatBadge" style="position:absolute; top:-5px; right:-5px; background:#dc3545; color:white; width:20px; height:20px; border-radius:50%; font-size:12px; display:none;">1</span>
+    </button>
+</div>
+
+<!-- Chat Window -->
+<div id="chatWindow">
+    <div class="chat-header">
+        <div>
+            <i class="fas fa-headset"></i>
+            <span style="font-weight:bold; margin-left:10px;">Hotel Royal Support</span>
+        </div>
+        <div>
+            <span style="background:#28a745; width:10px; height:10px; display:inline-block; border-radius:50%;"></span>
+            <span style="margin:0 10px;">Online</span>
+            <button onclick="toggleChat()" style="background:transparent; border:none; color:white; font-size:20px; cursor:pointer;">&times;</button>
+        </div>
+    </div>
+    
+    <div class="chat-messages" id="chatMessages">
+        <div style="margin-bottom:15px; text-align:left;">
+            <img src="https://ui-avatars.com/api/?name=Support&background=007bff&color=fff" style="width:30px; height:30px; border-radius:50%; display:inline-block; margin-right:10px;">
+            <div style="display:inline-block; background:#007bff; color:white; padding:8px 15px; border-radius:15px; max-width:70%;">
+                नमस्ते! मी तुम्हाला कशी मदत करू शकतो?
+            </div>
+            <div style="font-size:10px; color:#999; margin-top:5px; margin-left:40px;">Just now</div>
+        </div>
+    </div>
+    
+    <div class="chat-footer">
+        <div style="display:flex; gap:5px; flex-wrap:wrap; margin-bottom:10px;">
+            <button onclick="sendQuickReply('room')" style="padding:5px 10px; background:#f0f0f0; border:none; border-radius:15px; cursor:pointer;">🏨 Room Booking</button>
+            <button onclick="sendQuickReply('food')" style="padding:5px 10px; background:#f0f0f0; border:none; border-radius:15px; cursor:pointer;">🍽️ Restaurant</button>
+            <button onclick="sendQuickReply('payment')" style="padding:5px 10px; background:#f0f0f0; border:none; border-radius:15px; cursor:pointer;">💰 Payment</button>
+        </div>
+        
+        <div style="display:flex; gap:10px;">
+            <input type="text" id="chatInput" placeholder="Type your message..." style="flex:1; padding:10px; border:1px solid #ddd; border-radius:20px; outline:none;">
+            <button onclick="sendMessage()" style="background:#007bff; color:white; border:none; width:40px; height:40px; border-radius:50%; cursor:pointer;">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<div class="footer">
+    <div class="footer-content">
+        <div>
+            <h1>Hotel Royal Stay</h1>
+            <p>Address: MG Road, Kolhapur, Maharashtra</p>
+            <p>Email: hotelroyalstay@gmail.com</p>
+            <p>Contact: +91 9876543210</p>
+            <p>Landline: 020-24567890</p>
+        </div>
+    </div>
+
+    <div class="follow">
+        <h2>Follow Us</h2>
+        <div class="social">
+            <a href="https://www.instagram.com/om____1199?igsh=ZXNtZm15aGNxZ3Rp" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://youtube.com/@omkandalkar326?si=peEW-RMoxGJrXM2g" target="_blank">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://www.facebook.com/" target="_blank">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://wa.me/8275761213" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
+    
+    <div class="copyright">
+        © 2026 Hotel Royal Stay | Luxury 3-Star Experience
+    </div>
+</div>
+
+<!-- ========== FLOATING BUTTONS ========== -->
+<a href="tel:+918275761213" class="floating-call" target="_self">
+    <i class="fas fa-phone"></i>
+</a>
+<a href="https://www.google.com/maps/place/Kolhapur+Maharashtra" class="floating-map" target="_blank">
+    <i class="fas fa-map-marker-alt"></i>
+</a>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script>
+const { jsPDF } = window.jspdf;
+
+// ========== FOOD DATA ==========
+let foods = [
+    ["Paneer Butter Masala", 250, "Paneer Butter Masala.jpg"],
+    ["Veg Biryani", 220, "Veg Biryani.jpg"],
+    ["Margherita Pizza", 280, "Margherita Pizza.jpg"],
+    ["Mushroom Risotto", 300, "Mushroom Risotto.jpg"],
+    ["Idali chatni", 180, "idali.jpg"],
+    ["Veg Manchurian", 200, "Veg Manchurian.jpg"],
+    ["Palak Paneer", 240, "Palak Paneer.jpg"],
+    ["Chole Bhature", 210, "Chole Bhature.jpg"],
+    ["Veg Hakka Noodles", 190, "Veg Hakka Noodles.jpg"],
+    ["Stuffed Capsicum", 230, "Stuffed Capsicum.jpg"],
+    ["Aloo Gobi", 170, "Aloo Gobi.jpg"],
+    ["Cheese Nachos", 260, "Cheese Nachos.jpg"],
+    ["Chicken Biryani", 320, "Chicken Biryani.jpg"],
+    ["Butter Chicken", 350, "Butter Chicken.jpg"],
+    ["Mutton Rogan Josh", 420, "Mutton Rogan Josh.jpg"],
+    ["Fish Curry", 340, "Fish Curry.jpg"],
+    ["Chicken Tikka", 300, "Chicken Tikka.jpg"],
+    ["Prawn Masala", 380, "Prawn Masala.jpg"],
+    ["Grilled Lamb Chops", 450, "Grilled Lamb Chops.jpg"],
+    ["Egg Fried Rice", 220, "Egg Fried Rice.jpg"],
+    ["Chicken Shawarma", 250, "Chicken Shawarma.jpg"],
+    ["Fish and Chips", 310, "Fish and Chips.jpg"],
+    ["Chicken Alfredo Pasta", 330, "Chicken Alfredo Pasta.jpg"],
+    ["Tandoori Chicken", 360, "Tandoori Chicken.jpg"],
+    ["Pepperoni Pizza", 390, "Pepperoni Pizza.jpg"]
+];
+
+let cart = [];
+let totalAmount = 0;
+let paymentDone = false;
+
+// ========== DISPLAY FOOD ==========
+const container = document.getElementById("foodContainer");
+
+foods.forEach((food, index) => {
+    container.innerHTML += `
+    <div class="menu-item">
+        <img src="${food[2]}" onerror="this.src='https://via.placeholder.com/250x180?text=${food[0]}'">
+        <h3>${food[0]}</h3>
+        <div class="price">₹${food[1]}</div>
+        <input type="number" min="1" value="1" id="qty${index}" class="qty">
+        <br>
+        <button onclick="addOrder(${index})" class="order-btn">Order Now</button>
+    </div>
+    `;
+});
+
+// ========== ADD ORDER ==========
+function addOrder(i) {
+    let qty = document.getElementById("qty" + i).value;
+    let subtotal = qty * foods[i][1];
+
+    cart.push({
+        name: foods[i][0],
+        qty: qty,
+        price: foods[i][1],
+        subtotal: subtotal
+    });
+
+    totalAmount += subtotal;
+
+    let output = "";
+    cart.forEach(item => {
+        output += item.name + " x " + item.qty + " = ₹" + item.subtotal + "<br>";
+    });
+
+    document.getElementById("orderDetails").innerHTML = output;
+    document.getElementById("total").innerText = "Total: ₹" + totalAmount;
+    
+    showNotification(item.name + " added to cart!", 'success');
+}
+
+// ========== PAY NOW ==========
+function payNow() {
+    if(totalAmount === 0) {
+        showNotification("Please order something first!", 'error');
+        return;
+    }
+
+    let mode = document.getElementById("paymentMode").value;
+    showNotification("Payment Successful via " + mode + "! ✅", 'success');
+    paymentDone = true;
+}
+
+// ========== DOWNLOAD PDF ==========
+function downloadPDF() {
+    if(!paymentDone) {
+        showNotification("Please complete payment first!", 'error');
+        return;
+    }
+
+    if(cart.length === 0) {
+        showNotification("No items found!", 'error');
+        return;
+    }
+
+    let mode = document.getElementById("paymentMode").value;
+    let billId = "RES" + Math.floor(Math.random() * 10000);
+    let today = new Date();
+    
+    const doc = new jsPDF();
+    let currentPage = 1;
+    let itemsPerPage = 8;
+    let totalPages = Math.ceil(cart.length / itemsPerPage);
+    
+    for(let page = 0; page < totalPages; page++) {
+        if(page > 0) {
+            doc.addPage();
+            currentPage++;
+        }
+        
+        // Header
+        doc.setFillColor(255, 215, 0);
+        doc.rect(0, 0, 210, 40, 'F');
+        
+        doc.setFontSize(24);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont("helvetica", "bold");
+        doc.text(" HOTEL ROYAL STAY", 45, 20);
+        
+        doc.setFontSize(14);
+        doc.setTextColor(50, 50, 50);
+        doc.text("Restaurant Bill Receipt", 60, 32);
+        
+        doc.setDrawColor(255, 215, 0);
+        doc.setLineWidth(0.5);
+        doc.line(20, 45, 190, 45);
+        
+        // Bill Details
+        doc.setFillColor(245, 245, 245);
+        doc.roundedRect(20, 50, 170, 35, 3, 3, 'F');
+        
+        doc.setFontSize(10);
+        doc.setTextColor(100, 100, 100);
+        doc.text("Bill ID:", 25, 62);
+        doc.text("Date:", 25, 72);
+        doc.text("Payment Mode:", 25, 82);
+        
+        doc.setTextColor(0, 0, 0);
+        doc.setFont("helvetica", "bold");
+        doc.text(billId, 70, 62);
+        doc.text(today.toLocaleDateString() + " " + today.toLocaleTimeString(), 70, 72);
+        doc.text(mode, 70, 82);
+        
+        doc.setFontSize(8);
+        doc.setTextColor(150, 150, 150);
+        doc.text(`Page ${currentPage} of ${totalPages}`, 170, 92);
+        
+        // Items Table
+        doc.setFontSize(12);
+        doc.setTextColor(255, 215, 0);
+        doc.setFont("helvetica", "bold");
+        doc.text(" ORDERED ITEMS", 70, 105);
+        
+        doc.setFillColor(230, 230, 230);
+        doc.rect(20, 110, 170, 8, 'F');
+        
+        doc.setFontSize(10);
+        doc.setTextColor(0, 0, 0);
+        doc.text("Sr.No", 25, 116);
+        doc.text("Item Name", 50, 116);
+        doc.text("Qty", 120, 116);
+        doc.text("Price", 150, 116);
+        
+        let y = 125;
+        let start = page * itemsPerPage;
+        let end = Math.min(start + itemsPerPage, cart.length);
+        
+        for(let i = start; i < end; i++) {
+            let item = cart[i];
+            let globalIndex = i + 1;
+            
+            doc.setFontSize(9);
+            doc.setTextColor(50, 50, 50);
+            doc.text(globalIndex.toString(), 25, y);
+            doc.text(item.name.substring(0, 18), 50, y);
+            doc.text(item.qty.toString(), 125, y);
+            doc.text("₹" + item.subtotal, 150, y);
+            y += 7;
+        }
+        
+        if(page === totalPages - 1) {
+            let subtotal = totalAmount;
+            let gst = Math.round(totalAmount * 0.18);
+            let grandTotal = subtotal + gst;
+            
+            y += 10;
+            doc.setFillColor(240, 248, 255);
+            doc.roundedRect(20, y, 170, 55, 3, 3, 'F');
+            
+            doc.setFontSize(10);
+            doc.setTextColor(0, 0, 0);
+            doc.setFont("helvetica", "bold");
+            doc.text(" PAYMENT SUMMARY", 70, y + 8);
+            
+            doc.setFont("helvetica", "normal");
+            doc.text("Subtotal:", 30, y + 18);
+            doc.text("GST (18%):", 30, y + 28);
+            doc.text("Grand Total:", 30, y + 38);
+            doc.text("Payment Status:", 30, y + 48);
+            
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(0, 150, 0);
+            doc.text("₹" + subtotal, 100, y + 18);
+            doc.setTextColor(255, 140, 0);
+            doc.text("₹" + gst, 100, y + 28);
+            doc.setTextColor(0, 0, 255);
+            doc.text("₹" + grandTotal, 100, y + 38);
+            doc.setTextColor(0, 150, 0);
+            doc.text("PAID ✅", 100, y + 48);
+            
+            y += 65;
+        } else {
+            y += 15;
+            doc.setFontSize(9);
+            doc.setTextColor(255, 0, 0);
+            doc.text("→ Continued on next page...", 70, y);
+            y += 10;
+        }
+        
+        doc.setDrawColor(255, 215, 0);
+        doc.line(20, y, 190, y);
+        
+        doc.setFontSize(8);
+        doc.setTextColor(150, 150, 150);
+        doc.text("This is a computer generated receipt - Valid without signature", 30, y + 8);
+        
+        if(page === totalPages - 1) {
+            doc.text("Thank you for dining at Hotel Royal Stay!", 45, y + 15);
+            doc.text("Visit Again!", 80, y + 22);
+            
+            doc.setFillColor(0, 0, 0);
+            doc.rect(160, y - 5, 20, 20, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(6);
+            doc.text("Scan for", 165, y + 3);
+            doc.text("Feedback", 167, y + 8);
+        } else {
+            doc.text(`Continued on page ${currentPage + 1}...`, 70, y + 15);
+        }
+    }
+    
+    doc.save("Hotel_Royal_Stay_Restaurant_Bill.pdf");
+    showNotification("Bill downloaded successfully!", 'success');
+}
+
+// ========== LOGIN / REGISTER SYSTEM ==========
+let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+
+function openLoginModal() {
+    document.getElementById('loginModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('loginModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function switchTab(tab) {
+    if(tab === 'login') {
+        document.getElementById('loginTab').style.background = '#ffd700';
+        document.getElementById('registerTab').style.background = '#f0f0f0';
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('registerForm').style.display = 'none';
+    } else {
+        document.getElementById('loginTab').style.background = '#f0f0f0';
+        document.getElementById('registerTab').style.background = '#ffd700';
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('registerForm').style.display = 'block';
+    }
+}
+
+function register() {
+    let name = document.getElementById('regName').value;
+    let email = document.getElementById('regEmail').value;
+    let mobile = document.getElementById('regMobile').value;
+    let password = document.getElementById('regPassword').value;
+    
+    if(!name || !email || !mobile || !password) {
+        showNotification('कृपया सर्व माहिती भरा!', 'error');
+        return;
+    }
+    
+    if(mobile.length !== 10) {
+        showNotification('मोबाइल नंबर 10 अंकी असावा!', 'error');
+        return;
+    }
+    
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    
+    if(users.find(u => u.email === email)) {
+        showNotification('हा ईमेल आधीपासून नोंदणीकृत आहे!', 'error');
+        return;
+    }
+    
+    let newUser = {
+        id: Date.now(),
+        name: name,
+        email: email,
+        mobile: mobile,
+        password: password,
+        avatar: 'https://ui-avatars.com/api/?name=' + name + '&background=ffd700&color=000',
+        joinDate: new Date().toLocaleDateString()
+    };
+    
+    users.push(newUser);
+    localStorage.setItem('users', JSON.stringify(users));
+    
+    showNotification('नोंदणी यशस्वी! कृपया लॉगिन करा.', 'success');
+    switchTab('login');
+    
+    document.getElementById('regName').value = '';
+    document.getElementById('regEmail').value = '';
+    document.getElementById('regMobile').value = '';
+    document.getElementById('regPassword').value = '';
+}
+
+function login() {
+    let email = document.getElementById('loginEmail').value;
+    let password = document.getElementById('loginPassword').value;
+    
+    if(!email || !password) {
+        showNotification('ईमेल आणि पासवर्ड भरा!', 'error');
+        return;
+    }
+    
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    let user = users.find(u => u.email === email && u.password === password);
+    
+    if(user) {
+        currentUser = user;
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        updateUIAfterLogin();
+        closeModal();
+        showNotification('स्वागत आहे ' + user.name + '!', 'success');
+    } else {
+        showNotification('ईमेल किंवा पासवर्ड चुकीचा!', 'error');
+    }
+}
+
+function updateUIAfterLogin() {
+    if(currentUser) {
+        document.getElementById('loginBtn').style.display = 'none';
+        document.getElementById('userProfile').style.display = 'block';
+        document.getElementById('userAvatar').src = currentUser.avatar;
+        document.getElementById('userName').innerText = currentUser.name;
+        document.getElementById('userEmail').innerText = currentUser.email;
+    }
+}
+
+function showUserMenu() {
+    let menu = document.getElementById('userMenu');
+    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+}
+
+function logout() {
+    currentUser = null;
+    localStorage.removeItem('currentUser');
+    document.getElementById('loginBtn').style.display = 'block';
+    document.getElementById('userProfile').style.display = 'none';
+    showNotification('लॉगआउट यशस्वी!', 'info');
+}
+
+function forgotPassword() {
+    let email = prompt('तुमचा नोंदणीकृत ईमेल प्रविष्ट करा:');
+    if(email) {
+        showNotification('पासवर्ड रीसेट लिंक तुमच्या ईमेलवर पाठवली आहे.', 'info');
+    }
+}
+
+// ========== LIVE CHAT SYSTEM ==========
+let chatVisible = false;
+
+function toggleChat() {
+    chatVisible = !chatVisible;
+    document.getElementById('chatWindow').style.display = chatVisible ? 'block' : 'none';
+    
+    if(chatVisible) {
+        document.getElementById('chatBadge').style.display = 'none';
+        loadChatHistory();
+    }
+}
+
+function sendMessage() {
+    let input = document.getElementById('chatInput');
+    let message = input.value.trim();
+    
+    if(message === '') return;
+    
+    addMessage('user', message);
+    saveMessage('user', message);
+    input.value = '';
+    
+    showTypingIndicator();
+    
+    setTimeout(() => {
+        removeTypingIndicator();
+        generateReply(message);
+    }, 1500);
+}
+
+function addMessage(sender, text) {
+    let chatDiv = document.getElementById('chatMessages');
+    let messageDiv = document.createElement('div');
+    
+    let time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    
+    if(sender === 'user') {
+        messageDiv.innerHTML = `
+            <div style="margin-bottom:15px; text-align:right;">
+                <div style="display:inline-block; background:#28a745; color:white; padding:8px 15px; border-radius:15px; max-width:70%; text-align:left;">
+                    ${text}
+                </div>
+                <div style="font-size:10px; color:#999; margin-top:5px;">${time}</div>
+            </div>
+        `;
+    } else {
+        messageDiv.innerHTML = `
+            <div style="margin-bottom:15px; text-align:left;">
+                <img src="https://ui-avatars.com/api/?name=Support&background=007bff&color=fff" style="width:30px; height:30px; border-radius:50%; display:inline-block; margin-right:10px;">
+                <div style="display:inline-block; background:#007bff; color:white; padding:8px 15px; border-radius:15px; max-width:70%;">
+                    ${text}
+                </div>
+                <div style="font-size:10px; color:#999; margin-top:5px; margin-left:40px;">${time}</div>
+            </div>
+        `;
+    }
+    
+    chatDiv.appendChild(messageDiv);
+    chatDiv.scrollTop = chatDiv.scrollHeight;
+}
+
+function showTypingIndicator() {
+    let chatDiv = document.getElementById('chatMessages');
+    let indicator = document.createElement('div');
+    indicator.id = 'typingIndicator';
+    indicator.innerHTML = `
+        <div style="margin-bottom:15px; text-align:left;">
+            <img src="https://ui-avatars.com/api/?name=Support&background=007bff&color=fff" style="width:30px; height:30px; border-radius:50%; display:inline-block; margin-right:10px;">
+            <div style="display:inline-block; background:#e9ecef; color:#666; padding:8px 15px; border-radius:15px;">
+                <i class="fas fa-circle" style="font-size:8px; margin:0 2px; animation:typing 1s infinite;"></i>
+                <i class="fas fa-circle" style="font-size:8px; margin:0 2px; animation:typing 1s infinite 0.2s;"></i>
+                <i class="fas fa-circle" style="font-size:8px; margin:0 2px; animation:typing 1s infinite 0.4s;"></i>
+            </div>
+        </div>
+    `;
+    chatDiv.appendChild(indicator);
+    chatDiv.scrollTop = chatDiv.scrollHeight;
+}
+
+function removeTypingIndicator() {
+    let indicator = document.getElementById('typingIndicator');
+    if(indicator) indicator.remove();
+}
+
+function generateReply(userMessage) {
+    let reply = '';
+    userMessage = userMessage.toLowerCase();
+    
+    if(userMessage.includes('room') || userMessage.includes('book')) {
+        reply = 'आमच्याकडे डिलक्स, एक्झिक्युटिव आणि रॉयल रूम उपलब्ध आहेत. कृपया लॉजिंग पेजवर जाऊन बुक करा.';
+    } else if(userMessage.includes('food') || userMessage.includes('restaurant')) {
+        reply = 'आमच्या रेस्टॉरंटमध्ये उत्तम जेवण उपलब्ध आहे. मेन्यू पाहण्यासाठी रेस्टॉरंट पेजवर जा.';
+    } else if(userMessage.includes('payment')) {
+        reply = 'आम्ही UPI, कार्ड आणि नेट बँकिंग स्वीकारतो. पेमेंट सुरक्षित आहे.';
+    } else if(userMessage.includes('price') || userMessage.includes('cost')) {
+        reply = 'रूमची किंमत ₹2499 ते ₹12999 पर्यंत आहे. अ‍ॅडव्हान्स बुकिंगवर 40% सूट मिळते.';
+    } else if(userMessage.includes('hello') || userMessage.includes('hi')) {
+        reply = 'नमस्ते! तुमचे Hotel Royal Stay मध्ये स्वागत आहे.';
+    } else {
+        reply = 'धन्यवाद! तुमच्या प्रश्नासाठी. आमची टीम लवकरच उत्तर देईल. 📞 +91 9876543210 वर कॉल करा.';
+    }
+    
+    addMessage('support', reply);
+    saveMessage('support', reply);
+}
+
+function sendQuickReply(type) {
+    let message = '';
+    switch(type) {
+        case 'room':
+            message = 'मला रूम बुक करायची आहे.';
+            break;
+        case 'food':
+            message = 'रेस्टॉरंट मेन्यू पाठवा.';
+            break;
+        case 'payment':
+            message = 'पेमेंट पर्याय काय आहेत?';
+            break;
+    }
+    
+    addMessage('user', message);
+    saveMessage('user', message);
+    showTypingIndicator();
+    
+    setTimeout(() => {
+        removeTypingIndicator();
+        generateReply(message);
+    }, 1000);
+}
+
+function saveMessage(sender, message) {
+    let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+    chatHistory.push({
+        sender: sender,
+        message: message,
+        time: new Date().toISOString()
+    });
+    localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+}
+
+function loadChatHistory() {
+    let chatDiv = document.getElementById('chatMessages');
+    chatDiv.innerHTML = '';
+    
+    let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+    
+    if(chatHistory.length === 0) {
+        addMessage('support', 'नमस्ते! मी तुम्हाला कशी मदत करू शकतो?');
+    } else {
+        chatHistory.forEach(msg => {
+            let time = new Date(msg.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            addMessage(msg.sender, msg.message);
+        });
+    }
+}
+
+// ========== NOTIFICATION SYSTEM ==========
+function showNotification(message, type = 'info') {
+    let existing = document.getElementById('notification');
+    if(existing) existing.remove();
+    
+    let notification = document.createElement('div');
+    notification.id = 'notification';
+    
+    let colors = {
+        success: { bg: '#28a745', icon: 'fa-check-circle' },
+        error: { bg: '#dc3545', icon: 'fa-exclamation-circle' },
+        info: { bg: '#17a2b8', icon: 'fa-info-circle' },
+        warning: { bg: '#ffc107', icon: 'fa-exclamation-triangle' }
+    };
+    
+    let color = colors[type] || colors.info;
+    
+    notification.style.cssText = `
+        background: ${color.bg};
+        color: white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        animation: slideIn 0.3s ease-out;
+        max-width: 350px;
+    `;
+    
+    notification.innerHTML = `
+        <i class="fas ${color.icon}" style="font-size: 20px;"></i>
+        <div style="flex:1;">
+            <div style="font-weight: bold; margin-bottom: 5px;">${type.toUpperCase()}</div>
+            <div style="font-size: 14px;">${message}</div>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        if(notification && notification.parentNode) {
+            notification.style.animation = 'slideOut 0.3s ease-out';
+            setTimeout(() => {
+                if(notification.parentNode) notification.remove();
+            }, 300);
+        }
+    }, 3000);
+}
+
+// ========== OFFER NOTIFICATION ==========
+setTimeout(() => {
+    if(!localStorage.getItem('offerShown')) {
+        let notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            bottom: 120px;
+            right: 20px;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: black;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 3500;
+            width: 300px;
+            cursor: pointer;
+            animation: slideUp 0.5s;
+        `;
+        
+        notification.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <i class="fas fa-gift" style="font-size: 30px;"></i>
+                <div>
+                    <h3 style="margin: 0 0 5px 0;">Special Offer! 🔥</h3>
+                    <p style="margin: 0; font-size: 14px;">40% off on early booking!</p>
+                    <p style="margin: 5px 0 0 0; font-size: 12px;">Click to claim</p>
+                </div>
+            </div>
+        `;
+        
+        notification.onclick = function() {
+            window.location.href = 'booking.html';
+        };
+        
+        document.body.appendChild(notification);
+        localStorage.setItem('offerShown', 'true');
+        
+        setTimeout(() => {
+            if(notification.parentNode) notification.remove();
+        }, 10000);
+    }
+}, 5000);
+
+// ========== INITIALIZATION ==========
+document.addEventListener('DOMContentLoaded', function() {
+    if(currentUser) {
+        updateUIAfterLogin();
+    }
+});
+
+window.onclick = function(event) {
+    let modal = document.getElementById('loginModal');
+    if(event.target === modal) {
+        closeModal();
+    }
+    
+    if(!event.target.closest('#userProfile')) {
+        document.getElementById('userMenu').style.display = 'none';
+    }
+};
+</script>
+
+</body>
+</html>

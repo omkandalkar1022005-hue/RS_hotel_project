@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hall & Lawn | Hotel Royal Stay</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:linear-gradient(135deg,#1d2671,#c33764);color:white;}
+
+header{
+text-align:center;
+padding:25px;
+font-size:30px;
+font-weight:700;
+background:black;
+color:#ffcc00;
+}
+
+.slider{
+width:90%;
+max-width:1000px;
+height:350px;
+margin:30px auto;
+position:relative;
+overflow:hidden;
+border-radius:15px;
+}
+
+.slides img{
+width:100%;
+height:350px;
+object-fit:cover;
+position:absolute;
+opacity:0;
+transition:1s;
+}
+
+.slides img.active{opacity:1;}
+
+.section-title{
+text-align:center;
+font-size:26px;
+margin:30px 0;
+color:#ffcc00;
+}
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.item{
+background:rgba(255,255,255,0.1);
+padding:15px;
+border-radius:15px;
+text-align:center;
+transition:0.3s;
+}
+
+.item:hover{
+transform:scale(1.05);
+background:rgba(255,204,0,0.2);
+}
+
+.item img{
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:10px;
+}
+
+button{
+padding:8px 15px;
+border:none;
+background:linear-gradient(45deg,#ffcc00,#ff6600);
+font-weight:bold;
+border-radius:5px;
+cursor:pointer;
+}
+
+.order-box{
+background:black;
+margin:30px;
+padding:20px;
+border-radius:15px;
+}
+
+footer{
+text-align:center;
+padding:20px;
+background:black;
+}
+</style>
+</head>
+<body>
+
+<header>🏛 Royal Banquet & Lawn - Hotel Royal Stay 👑</header>
+
+<!-- SLIDER -->
+<div class="slider">
+<div class="slides">
+<img src="wed2.jpg" class="active">
+<img src="lawn7.jpg">
+<img src="con.jpg">
+<img src="hall6.jpg">
+</div>
+</div>
+
+<!-- HALL SECTION -->
+<h2 class="section-title">🎉 Available Halls</h2>
+<div class="container" id="hallContainer"></div>
+
+<!-- LAWN SECTION -->
+<h2 class="section-title">🌿 Available Lawns</h2>
+<div class="container" id="lawnContainer"></div>
+
+<!-- BOOKING BOX -->
+<div class="order-box">
+<h2>📋 Booking Details</h2>
+<p id="bookingDetails">Nothing Selected</p>
+<h3 id="total">Total: ₹0</h3>
+<br>
+<button onclick="payNow()">Confirm Booking</button>
+</div>
+
+<footer>© 2026 Hotel Royal Stay</footer>
+
+<script>
+// ===== Slider =====
+let slideIndex=0;
+const slides=document.querySelectorAll('.slides img');
+setInterval(()=>{
+slides.forEach(s=>s.classList.remove('active'));
+slides[slideIndex].classList.add('active');
+slideIndex=(slideIndex+1)%slides.length;
+},2000);
+
+// ===== Booking Logic =====
+let total=0;
+let booking="";
+
+// HALL DATA
+const halls=[
+["Grand Wedding Hall",50000,"hall2.jpg"],
+["Conference Hall",20000,"h_hall.jpg"],
+["Birthday Party Hall",15000,"h_hall3.jpg"]
+];
+
+// LAWN DATA (Full HD Images 1920x1080 recommended)
+const lawns=[
+["Royal Wedding Lawn",80000,"https://images.unsplash.com/photo-1505236858219-8359eb29e329"],
+["Reception Garden Lawn",60000,"https://images.unsplash.com/photo-1519167758481-83f550bb49b3"],
+["Corporate Event Lawn",50000,"https://images.unsplash.com/photo-1492684223066-81342ee5ff30"]
+];
+
+// Render Halls
+const hallContainer=document.getElementById("hallContainer");
+halls.forEach((item,i)=>{
+let div=document.createElement("div");
+div.className="item";
+div.innerHTML=`
+<img src="${item[2]}">
+<h3>${item[0]}</h3>
+<p>Price: ₹${item[1]}</p>
+<br>
+<button onclick="selectBooking('${item[0]}',${item[1]})">Book Now</button>
+`;
+hallContainer.appendChild(div);
+});
+
+// Render Lawns
+const lawnContainer=document.getElementById("lawnContainer");
+lawns.forEach((item,i)=>{
+let div=document.createElement("div");
+div.className="item";
+div.innerHTML=`
+<img src="${item[2]}">
+<h3>${item[0]}</h3>
+<p>Price: ₹${item[1]}</p>
+<br>
+<button onclick="selectBooking('${item[0]}',${item[1]})">Book Now</button>
+`;
+lawnContainer.appendChild(div);
+});
+
+// Booking Function
+function selectBooking(name,price){
+booking=name;
+total=price;
+document.getElementById("bookingDetails").innerText=booking;
+document.getElementById("total").innerText="Total: ₹"+total;
+}
+
+function payNow(){
+if(total==0){
+alert("Please Select Hall or Lawn First!");
+return;
+}
+alert("Booking Confirmed 🎉");
+booking="";
+total=0;
+document.getElementById("bookingDetails").innerText="Nothing Selected";
+document.getElementById("total").innerText="Total: ₹0";
+}
+</script>
+
+</body>
+</html>

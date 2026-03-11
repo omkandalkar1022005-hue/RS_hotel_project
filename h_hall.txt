@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hall | Hotel Royal Stay</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:linear-gradient(135deg,#1d2671,#c33764);color:white;}
+
+header{
+text-align:center;
+padding:25px;
+font-size:30px;
+font-weight:700;
+background:black;
+color:#ffcc00;
+}
+
+.slider{
+width:90%;
+max-width:1000px;
+height:350px;
+margin:30px auto;
+position:relative;
+overflow:hidden;
+border-radius:15px;
+}
+
+.slides img{
+width:100%;
+height:350px;
+object-fit:cover;
+position:absolute;
+opacity:0;
+transition:1s;
+}
+
+.slides img.active{opacity:1;}
+
+.section-title{
+text-align:center;
+font-size:26px;
+margin:30px 0;
+color:#ffcc00;
+}
+
+.hall-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.hall-item{
+background:rgba(255,255,255,0.1);
+padding:15px;
+border-radius:15px;
+text-align:center;
+transition:0.3s;
+}
+
+.hall-item:hover{
+transform:scale(1.05);
+background:rgba(255,204,0,0.2);
+}
+
+.hall-item img{
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:10px;
+}
+
+button{
+padding:8px 15px;
+border:none;
+background:linear-gradient(45deg,#ffcc00,#ff6600);
+font-weight:bold;
+border-radius:5px;
+cursor:pointer;
+}
+
+.order-box{
+background:black;
+margin:30px;
+padding:20px;
+border-radius:15px;
+}
+
+footer{
+text-align:center;
+padding:20px;
+background:black;
+}
+</style>
+</head>
+<body>
+
+<header>🏛 Royal Banquet Hall - Hotel Royal Stay 👑</header>
+
+<div class="slider">
+<div class="slides">
+<img src="hall1.jpg" class="active">
+<img src="hall2.jpg">
+<img src="hall3.jpg">
+</div>
+</div>
+
+<h2 class="section-title">🎉 Available Halls</h2>
+
+<div class="hall-container" id="hallContainer"></div>
+
+<div class="order-box">
+<h2>📋 Hall Booking Details</h2>
+<p id="bookingDetails">No Hall Booked</p>
+<h3 id="total">Total: ₹0</h3>
+<br>
+<button onclick="payNow()">Confirm Booking</button>
+</div>
+
+<footer>© 2026 Hotel Royal Stay</footer>
+
+<script>
+let slideIndex=0;
+const slides=document.querySelectorAll('.slides img');
+setInterval(()=>{
+slides.forEach(s=>s.classList.remove('active'));
+slides[slideIndex].classList.add('active');
+slideIndex=(slideIndex+1)%slides.length;
+},3000);
+
+let total=0;
+let booking=[];
+
+const halls=[
+["Grand Wedding Hall",50000,"https://cdn.pixabay.com/photo/2017/08/06/22/01/wedding-2595862_1280.jpg"],
+["Conference Hall",20000,"https://cdn.pixabay.com/photo/2016/11/29/05/45/meeting-1869580_1280.jpg"],
+["Birthday Party Hall",15000,"https://cdn.pixabay.com/photo/2016/11/29/09/08/party-1869657_1280.jpg"]
+];
+
+const container=document.getElementById("hallContainer");
+
+halls.forEach((hall,i)=>{
+let div=document.createElement("div");
+div.className="hall-item";
+div.innerHTML=`
+<img src="${hall[2]}">
+<h3>${hall[0]}</h3>
+<p>Price: ₹${hall[1]}</p>
+<br>
+<button onclick="bookHall(${i})">Book Now</button>
+`;
+container.appendChild(div);
+});
+
+function bookHall(i){
+booking=[halls[i][0]];
+total=halls[i][1];
+document.getElementById("bookingDetails").innerText=booking;
+document.getElementById("total").innerText="Total: ₹"+total;
+}
+
+function payNow(){
+if(total==0){alert("Please Select Hall First!");return;}
+alert("Hall Booking Confirmed 🎉");
+total=0;
+booking=[];
+document.getElementById("bookingDetails").innerText="No Hall Booked";
+document.getElementById("total").innerText="Total: ₹0";
+}
+</script>
+
+</body>
+</html>
