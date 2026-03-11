@@ -153,7 +153,7 @@ background:rgba(4, 15, 9, 0.6);
 padding:20px;
 margin:10px;
 border-radius:12px;
-background: #fvg122;
+background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
 color: #ffcc00;
 width:220px;
 text-align:center;
@@ -726,11 +726,11 @@ border-radius:15px;
 <!-- ========== SLIDER ========== -->
 <div class="slider">
     <div class="slides">
-        <img src="s1_bar.jpg" alt="">
-        <img src="barhd.jpg" alt="">
-        <img src="barhd2.jpg" alt="">
-        <img src="barhd5.jpg" alt="">
-        <img src="barhd6.jpg" alt="">
+        <img src="../images/bar/s1_bar.jpg" alt="Bar Image 1">
+        <img src="../images/bar/barhd.jpg" alt="Bar Image 2">
+        <img src="../images/bar/barhd2.jpg" alt="Bar Image 3">
+        <img src="../images/bar/barhd5.jpg" alt="Bar Image 4">
+        <img src="../images/bar/barhd6.jpg" alt="Bar Image 5">
     </div>
 </div>
 
@@ -904,16 +904,16 @@ let orderItems = [];
 let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
 
 const drinks = [
-    ["Red Wine", 800, "Redwine.jpg"],
-    ["Whiskey", 1200, "Whiskey.jpg"],
-    ["Beer", 300, "Beer.jpg"],
-    ["Vodka", 1000, "Vodka.jpg"],
-    ["Cocktail Special", 600, "Cocktail Special.jpg"],
-    ["Champagne", 2500, "Champagne.jpg"],
-    ["Coca cola", 150, "cocacola.jpg"],
-    ["Sprite", 250, "sprite.jpg"],
-    ["ThumbsUp", 200, "thumbsup.jpg"],
-    ["Mango maza", 50, "maja.jpg"],
+    ["Red Wine", 800, "../images/bar/redwine.jpg"],
+    ["Whiskey", 1200, "../images/bar/Whiskey.jpg"],
+    ["Beer", 300, "../images/bar/Beer.jpg"],
+    ["Vodka", 1000, "../images/bar/Vodka.jpg"],
+    ["Cocktail Special", 600, "../images/bar/Cocktail Special.jpg"],
+    ["Champagne", 2500, "../images/bar/Champagne.jpg"],
+    ["Coca cola", 150, "../images/bar/cocacola.jpg"],
+    ["Sprite", 250, "../images/bar/sprite.jpg"],
+    ["ThumbsUp", 200, "../images/bar/thumbsup.jpg"],
+    ["Mango maza", 50, "../images/bar/maja.jpg"],
 ];
 // ========== DISPLAY DRINKS ==========
 function displayDrinks() {

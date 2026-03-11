@@ -1,92 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Hotel Royal Stay</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant | Hotel Royal Stay</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins', sans-serif;
 }
 
 body{
-    font-family:'Poppins', sans-serif;
-    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364,#000000);
-    color:white;
+background:linear-gradient(135deg,#c9ead6,#b0e17e);
 }
 
 /* PREMIUM NAVBAR */
 .navbar{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    background: linear-gradient(90deg, #1a1a1a, #2d2d2d);
-    border-bottom:2px solid #ffd700;
-    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    padding: 10px 30px;
+    background: linear-gradient(90deg, #1a1a1a, #2d2d2d);
+    border-bottom: 2px solid #ffd700;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-/* LOGO */
 .logo{
-    font-family:'Cinzel', serif;
-    font-size:24px;
-    font-weight:900;
-    color:#ffd700;
-    text-shadow:0 0 10px rgba(255,215,0,0.5);
+    font-family: 'Cinzel', serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255,215,0,0.5);
 }
 
 .logo small{
-    font-size:14px;
-    color:#fff;
+    font-size: 12px;
+    color: #fff;
     display: block;
-    font-family:'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* MENU */
 .menu{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:30px;
-    flex-wrap: wrap;
+    display: flex;
+    gap: 30px;
 }
 
 .menu a{
-    text-decoration:none;
-    color:#fff;
-    font-weight:600;
-    font-size:16px;
-    position:relative;
-    transition:0.3s;
-    padding:5px 0;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    position: relative;
+    transition: 0.3s;
+    padding: 5px 0;
 }
 
 .menu a:hover{
-    color:#ffd700;
+    color: #ffd700;
 }
 
-/* Underline Animation */
 .menu a::after{
-    content:"";
-    position:absolute;
-    width:0%;
-    height:2px;
-    background:#ffd700;
-    left:0;
-    bottom:-2px;
-    transition:0.4s;
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #ffd700;
+    left: 0;
+    bottom: -2px;
+    transition: 0.4s;
 }
 
 .menu a:hover::after{
-    width:100%;
+    width: 100%;
 }
 
 /* USER SECTION */
@@ -97,18 +92,18 @@ body{
 }
 
 #loginBtn{
-    padding:8px 20px;
-    background:#ffd700;
-    border:none;
-    border-radius:25px;
-    cursor:pointer;
-    font-weight:600;
-    transition:0.3s;
+    padding: 8px 20px;
+    background: #ffd700;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
 }
 
 #loginBtn:hover{
-    transform:scale(1.05);
-    background:#ffaa00;
+    transform: scale(1.05);
+    background: #ffaa00;
 }
 
 #userProfile{
@@ -117,227 +112,274 @@ body{
 }
 
 #userAvatar{
-    width:45px;
-    height:45px;
-    border-radius:50%;
-    border:2px solid #ffd700;
-    transition:0.3s;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid #ffd700;
+    transition: 0.3s;
 }
 
 #userAvatar:hover{
-    transform:scale(1.1);
+    transform: scale(1.1);
 }
 
 #userMenu{
-    position:absolute;
-    right:0;
-    top:60px;
-    background:white;
-    color:black;
-    padding:15px;
-    border-radius:10px;
-    min-width:200px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.3);
-    z-index:1000;
+    position: absolute;
+    right: 0;
+    top: 60px;
+    background: white;
+    color: black;
+    padding: 15px;
+    border-radius: 10px;
+    min-width: 200px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    z-index: 1000;
 }
 
-/* HERO */
-.hero{
-    height:70vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    text-align:center;
-    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-    url("https://images.unsplash.com/photo-1551882547-ff40c63fe5fa");
-    background-size:cover;
+/* SECTION TITLE */
+.section-title{
+    text-align: center;
+    margin: 30px 0;
+    font-size: 32px;
+    font-family: 'Cinzel', serif;
+    color: #333;
 }
 
-.hero h1{
-    font-family:'Cinzel', serif;
-    font-size:65px;
-    background:linear-gradient(90deg,#ffd700,#ffffff,#ffd700);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+/* MENU CONTAINER */
+.menu-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 20px 40px;
 }
 
-.hero p{
-    font-size:22px;
-    margin-top:20px;
+.menu-item{
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: 0.3s;
 }
 
-/* BOOK NOW SECTION */
-.book-section{
-    height:45vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    text-align:center;
-    background:linear-gradient(135deg,#e89786,#b9e8cd,#e978dd);
-    background-size:400% 400%;
-    animation:gradientBG 6s ease infinite;
+.menu-item:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
 }
 
-.book-section h2{
-    font-family:'Cinzel', serif;
-    color: #2c5364;
-    font-size:42px;
-    margin-bottom:15px;
+.menu-item img{
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #ffd700;
 }
 
-.cashback{
-    font-size:28px;
-    color:#0f0f0e;
-    font-weight:bold;
-    margin-bottom:20px;
-    animation:pulse 1.5s infinite;
+.price{
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 20px;
+    color: #28a745;
 }
 
-.book-section button{
-    padding:18px 55px;
-    font-size:18px;
-    border:none;
-    border-radius:50px;
-    background:linear-gradient(90deg,#000,#444);
-    color:white;
-    cursor:pointer;
-    font-weight:bold;
-    transition:0.4s;
+.qty{
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
 }
 
-.book-section button:hover{
-    transform:scale(1.1);
-    background:#ffd700;
-    color:black;
+.order-btn{
+    margin-top: 10px;
+    padding: 8px 25px;
+    border: none;
+    background: linear-gradient(45deg, #ffcc00, #ff6600);
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+    color: white;
 }
 
-/* SLIDER */
-.slider-container{
-    margin:60px auto;
-    width:80%;
+.order-btn:hover{
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255,102,0,0.4);
 }
 
-.slider{
-    position:relative;
-    height:400px;
-    margin-bottom:40px;
-    overflow:hidden;
-    border-radius:20px;
-    box-shadow:0 0 25px rgba(255,215,0,0.3);
+/* ORDER BOX */
+.order-box{
+    background: #1a1a1a;
+    color: white;
+    margin: 30px 50px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.slide{
-    position:absolute;
-    width:100%;
-    height:100%;
-    opacity:0;
-    transition:1s;
+.bill-details{
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 15px 0;
+    min-height: 100px;
 }
 
-.slide img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
+.payment-section{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 20px 0;
+    flex-wrap: wrap;
 }
 
-.caption{
-    position:absolute;
-    bottom:0;
-    width:100%;
-    background:rgba(0,0,0,0.7);
-    padding:15px;
-    text-align:center;
-    font-weight:bold;
-    color:#ffd700;
+.payment-label{
+    color: #ffd700;
+    font-size: 16px;
+    font-weight: 600;
 }
 
-.active{
-    opacity:1;
+#paymentMode{
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #ffd700;
+    background: white;
+    font-size: 14px;
+    cursor: pointer;
+    width: 200px;
+}
+
+.button-group{
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.pay-btn{
+    padding: 10px 30px;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    background: linear-gradient(90deg, #00c853, #64dd17);
+    color: white;
+    min-width: 150px;
+}
+
+.bill-btn{
+    padding: 10px 30px;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    background: linear-gradient(90deg, #ff9800, #ff5722);
+    color: white;
+    min-width: 150px;
+}
+
+.pay-btn:hover, .bill-btn:hover{
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
 }
 
 /* FOOTER */
 .footer{
-    background:#edeeef;
-    padding:40px;
-    text-align:center;
-    color:#000;
+    background: #edeeef;
+    padding: 40px;
+    text-align: center;
+    margin-top: 30px;
 }
 
 .footer-content{
-    display:flex;
+    display: flex;
+    justify-content: center;
     color: #000;
     text-align: center;
-    justify-content:center;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
 }
 
 .footer h1{
-    text-align: center;
-    color:#f82c2c;
+    color: #f91c1c;
+    margin-bottom: 15px;
+    font-family: 'Cinzel', serif;
 }
 
 .follow{
-    width:100%;
-    text-align:center;
-    margin-top:30px;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
 }
 
 .follow h2{
-    color:#000;
+    color: #000;
 }
 
 .social{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:20px;
-    flex-wrap:wrap;
-    margin-top:15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 15px;
 }
 
 .social a{
-    color:#060101;  
-    font-size:25px;
-    transition:0.3s;
+    color: #060101;
+    font-size: 25px;
+    transition: 0.3s;
 }
 
 .social a:hover{
-    color:#ffd700;
-    transform:scale(1.3);
+    color: #ffd700;
+    transform: scale(1.3);
 }
 
+/* FLOATING BUTTONS */
 .floating-call, .floating-map{
-    position:fixed;
-    right:20px;
-    width:50px;
-    height:50px;
-    color:white;
-    border-radius:50%;
-    text-align:center;
-    line-height:50px;
-    font-size:20px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.3);
-    z-index:1000;
-    transition:0.3s;
+    position: fixed;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: 0.3s;
 }
 
 .floating-call{
-    bottom:100px;
-    background:#0a9030;
+    bottom: 100px;
+    background: #0a9030;
 }
 
 .floating-map{
-    bottom:30px;
-    background:#dc3545;
+    bottom: 30px;
+    background: #dc3545;
 }
 
 .floating-call:hover, .floating-map:hover{
-    transform:scale(1.1);
+    transform: scale(1.1);
 }
 
-/* Login Modal */
+.copyright{
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(13, 1, 1, 0.1);
+    color: #130c0c;
+    font-size: 14px;
+}
+
+/* LOGIN MODAL */
 #loginModal{
     display: none;
     position: fixed;
@@ -374,7 +416,7 @@ body{
     color: #000;
 }
 
-/* Chat Styles */
+/* CHAT BUTTON */
 #chatButton{
     position: fixed;
     bottom: 180px;
@@ -399,6 +441,7 @@ body{
     transform: scale(1.1);
 }
 
+/* CHAT WINDOW */
 #chatWindow{
     display: none;
     position: fixed;
@@ -414,7 +457,29 @@ body{
     animation: slideUp 0.3s;
 }
 
-/* Notification */
+.chat-header{
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-messages{
+    height: 360px;
+    overflow-y: auto;
+    padding: 15px;
+    background: #f8f9fa;
+}
+
+.chat-footer{
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background: white;
+}
+
+/* NOTIFICATION */
 #notification{
     position: fixed;
     top: 20px;
@@ -423,26 +488,14 @@ body{
 }
 
 /* ANIMATIONS */
-@keyframes pulse{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.1);}
-    100%{transform:scale(1);}
-}
-
-@keyframes gradientBG{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
+@keyframes modalPop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 @keyframes slideUp {
     from { transform: translateY(100px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes modalPop {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
 }
 
 @keyframes slideIn {
@@ -461,23 +514,36 @@ body{
     100% { opacity: 0.3; }
 }
 
-/* Responsive */
+/* RESPONSIVE */
 @media (max-width: 768px) {
     .navbar{
         flex-direction: column;
         gap: 10px;
+        padding: 10px;
     }
     
     .menu{
         gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
     
-    .hero h1{
-        font-size: 40px;
+    .menu a{
+        font-size: 14px;
     }
     
-    .book-section h2{
-        font-size: 30px;
+    .order-box{
+        margin: 20px;
+        padding: 20px;
+    }
+    
+    .payment-section{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    #paymentMode{
+        width: 100%;
     }
     
     #chatWindow{
@@ -498,7 +564,7 @@ body{
     </div>
 
     <div class="menu">
-        <a href="homepage.html">Home</a>
+        <a href="../index.html">Home</a>
         <a href="restaurant.html">Restaurant</a>
         <a href="h_lodge.html">Lodging</a>
         <a href="h_bar.html">Bar</a>
@@ -576,70 +642,54 @@ body{
     </div>
 </div>
 
-<!-- ========== HERO SECTION ========== -->
-<div class="hero">
-    <h1>Welcome to Royal Stay</h1>
-    <p>Experience Comfort • Class • Royalty • Quality</p>
-</div>
+<!-- ========== PAGE HEADER ========== -->
+<!-- <header> काढून टाकला कारण आता navbar आहे -->
 
-<!-- ========== BOOK SECTION ========== -->
-<div class="book-section">
-    <h2>Book Your Royal Experience Now</h2>
-    <div class="cashback">🔥 Get 40% Cashback on Early Booking 🔥</div>
-    <button onclick="window.location.href='booking.html'">BOOK NOW</button>
-</div>
+<!-- ========== MENU (दुसरा मेनू काढून टाकला) ========== -->
 
-<!-- ========== SLIDERS ========== -->
-<div class="slider-container">
-    <!-- SLIDER 1 -->
-    <div class="slider">
-        <div class="slide active">
-            <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c">
-            <div class="caption">Luxury Restaurant</div>
-        </div>
-        <div class="slide">
-            <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330">
-            <div class="caption">Premium Bar Lounge</div>
-        </div>
-        <div class="slide">
-            <img src="https://images.unsplash.com/photo-1560448075-bb485b067938">
-            <div class="caption">Spacious Parking Area</div>
-        </div>
+<h2 class="section-title">🥗 Our Special Dishes 🥗</h2>
+
+<!-- ========== FOOD CONTAINER ========== -->
+<div class="menu-container" id="foodContainer"></div>
+
+<!-- ========== ORDER BOX ========== -->
+<div class="order-box">
+    <h2 style="text-align:center;">🧾 Your Order Details</h2>
+    <div class="bill-details" id="orderDetails">
+        No items ordered yet.
+    </div>
+    <h3 id="total" style="text-align:center; color:#ffd700;">Total: ₹0</h3>
+
+    <div class="payment-section">
+        <span class="payment-label">💳 Payment Mode:</span>
+        <select id="paymentMode">
+            <option value="UPI">📱 UPI</option>
+            <option value="Card">💳 Card</option>
+            <option value="Net Banking">🏦 Net Banking</option>
+        </select>
     </div>
 
-    <!-- SLIDER 2 -->
-    <div class="slider">
-        <div class="slide active">
-            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b">
-            <div class="caption">AC Banquet Hall</div>
-        </div>
-        <div class="slide">
-            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267">
-            <div class="caption">Conference Hall</div>
-        </div>
-        <div class="slide">
-            <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511">
-            <div class="caption">Beautiful Lawn for Ceremony</div>
-        </div>
-        <div class="slide">
-            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3">
-            <div class="caption">Party & Celebration Area</div>
-        </div>
+    <div class="button-group">
+        <button onclick="payNow()" class="pay-btn">
+            <i class="fas fa-check-circle"></i> Pay Now
+        </button>
+        <button onclick="downloadPDF()" class="bill-btn">
+            <i class="fas fa-file-pdf"></i> Download Bill
+        </button>
     </div>
 </div>
 
 <!-- ========== LIVE CHAT ========== -->
 <div id="chatButton">
     <button class="chat-btn" onclick="toggleChat()">
-        <i class="fas fa-comment" style="font-size:24px;"></i>
+        <i class="fas fa-comment"></i>
         <span id="chatBadge" style="position:absolute; top:-5px; right:-5px; background:#dc3545; color:white; width:20px; height:20px; border-radius:50%; font-size:12px; display:none;">1</span>
     </button>
 </div>
 
 <!-- Chat Window -->
 <div id="chatWindow">
-    <!-- Chat Header -->
-    <div style="background:#007bff; color:white; padding:15px; display:flex; justify-content:space-between; align-items:center;">
+    <div class="chat-header">
         <div>
             <i class="fas fa-headset"></i>
             <span style="font-weight:bold; margin-left:10px;">Hotel Royal Support</span>
@@ -651,8 +701,7 @@ body{
         </div>
     </div>
     
-    <!-- Chat Messages -->
-    <div id="chatMessages" style="height:360px; overflow-y:auto; padding:15px; background:#f8f9fa;">
+    <div class="chat-messages" id="chatMessages">
         <div style="margin-bottom:15px; text-align:left;">
             <img src="https://ui-avatars.com/api/?name=Support&background=007bff&color=fff" style="width:30px; height:30px; border-radius:50%; display:inline-block; margin-right:10px;">
             <div style="display:inline-block; background:#007bff; color:white; padding:8px 15px; border-radius:15px; max-width:70%;">
@@ -662,15 +711,13 @@ body{
         </div>
     </div>
     
-    <!-- Quick Replies -->
-    <div style="padding:10px; border-top:1px solid #ddd; background:white;">
+    <div class="chat-footer">
         <div style="display:flex; gap:5px; flex-wrap:wrap; margin-bottom:10px;">
             <button onclick="sendQuickReply('room')" style="padding:5px 10px; background:#f0f0f0; border:none; border-radius:15px; cursor:pointer;">🏨 Room Booking</button>
             <button onclick="sendQuickReply('food')" style="padding:5px 10px; background:#f0f0f0; border:none; border-radius:15px; cursor:pointer;">🍽️ Restaurant</button>
             <button onclick="sendQuickReply('payment')" style="padding:5px 10px; background:#f0f0f0; border:none; border-radius:15px; cursor:pointer;">💰 Payment</button>
         </div>
         
-        <!-- Message Input -->
         <div style="display:flex; gap:10px;">
             <input type="text" id="chatInput" placeholder="Type your message..." style="flex:1; padding:10px; border:1px solid #ddd; border-radius:20px; outline:none;">
             <button onclick="sendMessage()" style="background:#007bff; color:white; border:none; width:40px; height:40px; border-radius:50%; cursor:pointer;">
@@ -725,10 +772,259 @@ body{
 
 <!-- ========== JAVASCRIPT ========== -->
 <script>
+const { jsPDF } = window.jspdf;
+
+// ========== FOOD DATA ==========
+let foods = [
+    ["Paneer Butter Masala", 250, "../images/food/Paneer Butter Masala.jpg"],
+    ["Veg Biryani", 220, "../images/food/Veg Biryani.jpg"],
+    ["Margherita Pizza", 280, "../images/food/Margherita Pizza.jpg"],
+    ["Mushroom Risotto", 300, "../images/food/Mushroom Risotto.jpg"],
+    ["Idali chatni", 180, "../images/food/idali.jpg"],
+    ["Veg Manchurian", 200, "../images/food/Veg Manchurian.jpg"],
+    ["Palak Paneer", 240, "../images/food/Palak Paneer.jpg"],
+    ["Chole Bhature", 210, "../images/food/Chole Bhature.jpg"],
+    ["Veg Hakka Noodles", 190, "../images/food/Veg Hakka Noodles.jpg"],
+    ["Stuffed Capsicum", 230, "../images/food/Stuffed Capsicum.jpg"],
+    ["Aloo Gobi", 170, "../images/food/Aloo Gobi.jpg"],
+    ["Cheese Nachos", 260, "../images/food/Cheese Nachos.jpg"],
+    ["Chicken Biryani", 320, "../images/food/Chicken Biryani.jpg"],
+    ["Butter Chicken", 350, "../images/food/Butter Chicken.jpg"],
+    ["Mutton Rogan Josh", 420, "../images/food/Mutton Rogan Josh.jpg"],
+    ["Fish Curry", 340, "../images/food/Fish Curry.jpg"],
+    ["Chicken Tikka", 300, "../images/food/Chicken Tikka.jpg"],
+    ["Prawn Masala", 380, "../images/food/Prawn Masala.jpg"],
+    ["Grilled Lamb Chops", 450, "../images/food/Grilled Lamb Chops.jpg"],
+    ["Egg Fried Rice", 220, "../images/food/Egg Fried Rice.jpg"],
+    ["Chicken Shawarma", 250, "../images/food/Chicken Shawarma.jpg"],
+    ["Fish and Chips", 310, "../images/food/Fish and Chips.jpg"],
+    ["Chicken Alfredo Pasta", 330, "../images/food/Chicken Alfredo Pasta.jpg"],
+    ["Tandoori Chicken", 360, "../images/food/Tandoori Chicken.jpg"],
+    ["Pepperoni Pizza", 390, "../images/food/Pepperoni Pizza.jpg"]
+];
+
+let cart = [];
+let totalAmount = 0;
+let paymentDone = false;
+
+// ========== DISPLAY FOOD ==========
+const container = document.getElementById("foodContainer");
+
+foods.forEach((food, index) => {
+    container.innerHTML += `
+    <div class="menu-item">
+        <img src="${food[2]}" onerror="this.src='https://via.placeholder.com/250x180?text=${food[0]}'">
+        <h3>${food[0]}</h3>
+        <div class="price">₹${food[1]}</div>
+        <input type="number" min="1" value="1" id="qty${index}" class="qty">
+        <br>
+        <button onclick="addOrder(${index})" class="order-btn">Order Now</button>
+    </div>
+    `;
+});
+
+// ========== ADD ORDER ==========
+function addOrder(i) {
+    let qty = document.getElementById("qty" + i).value;
+    let subtotal = qty * foods[i][1];
+
+    cart.push({
+        name: foods[i][0],
+        qty: qty,
+        price: foods[i][1],
+        subtotal: subtotal
+    });
+
+    totalAmount += subtotal;
+
+    let output = "";
+    cart.forEach(item => {
+        output += item.name + " x " + item.qty + " = ₹" + item.subtotal + "<br>";
+    });
+
+    document.getElementById("orderDetails").innerHTML = output;
+    document.getElementById("total").innerText = "Total: ₹" + totalAmount;
+    
+    showNotification(item.name + " added to cart!", 'success');
+}
+
+// ========== PAY NOW ==========
+function payNow() {
+    if(totalAmount === 0) {
+        showNotification("Please order something first!", 'error');
+        return;
+    }
+
+    let mode = document.getElementById("paymentMode").value;
+    showNotification("Payment Successful via " + mode + "! ✅", 'success');
+    paymentDone = true;
+}
+
+// ========== DOWNLOAD PDF ==========
+function downloadPDF() {
+    if(!paymentDone) {
+        showNotification("Please complete payment first!", 'error');
+        return;
+    }
+
+    if(cart.length === 0) {
+        showNotification("No items found!", 'error');
+        return;
+    }
+
+    let mode = document.getElementById("paymentMode").value;
+    let billId = "RES" + Math.floor(Math.random() * 10000);
+    let today = new Date();
+    
+    const doc = new jsPDF();
+    let currentPage = 1;
+    let itemsPerPage = 8;
+    let totalPages = Math.ceil(cart.length / itemsPerPage);
+    
+    for(let page = 0; page < totalPages; page++) {
+        if(page > 0) {
+            doc.addPage();
+            currentPage++;
+        }
+        
+        // Header
+        doc.setFillColor(255, 215, 0);
+        doc.rect(0, 0, 210, 40, 'F');
+        
+        doc.setFontSize(24);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont("helvetica", "bold");
+        doc.text(" HOTEL ROYAL STAY", 45, 20);
+        
+        doc.setFontSize(14);
+        doc.setTextColor(50, 50, 50);
+        doc.text("Restaurant Bill Receipt", 60, 32);
+        
+        doc.setDrawColor(255, 215, 0);
+        doc.setLineWidth(0.5);
+        doc.line(20, 45, 190, 45);
+        
+        // Bill Details
+        doc.setFillColor(245, 245, 245);
+        doc.roundedRect(20, 50, 170, 35, 3, 3, 'F');
+        
+        doc.setFontSize(10);
+        doc.setTextColor(100, 100, 100);
+        doc.text("Bill ID:", 25, 62);
+        doc.text("Date:", 25, 72);
+        doc.text("Payment Mode:", 25, 82);
+        
+        doc.setTextColor(0, 0, 0);
+        doc.setFont("helvetica", "bold");
+        doc.text(billId, 70, 62);
+        doc.text(today.toLocaleDateString() + " " + today.toLocaleTimeString(), 70, 72);
+        doc.text(mode, 70, 82);
+        
+        doc.setFontSize(8);
+        doc.setTextColor(150, 150, 150);
+        doc.text(`Page ${currentPage} of ${totalPages}`, 170, 92);
+        
+        // Items Table
+        doc.setFontSize(12);
+        doc.setTextColor(255, 215, 0);
+        doc.setFont("helvetica", "bold");
+        doc.text(" ORDERED ITEMS", 70, 105);
+        
+        doc.setFillColor(230, 230, 230);
+        doc.rect(20, 110, 170, 8, 'F');
+        
+        doc.setFontSize(10);
+        doc.setTextColor(0, 0, 0);
+        doc.text("Sr.No", 25, 116);
+        doc.text("Item Name", 50, 116);
+        doc.text("Qty", 120, 116);
+        doc.text("Price", 150, 116);
+        
+        let y = 125;
+        let start = page * itemsPerPage;
+        let end = Math.min(start + itemsPerPage, cart.length);
+        
+        for(let i = start; i < end; i++) {
+            let item = cart[i];
+            let globalIndex = i + 1;
+            
+            doc.setFontSize(9);
+            doc.setTextColor(50, 50, 50);
+            doc.text(globalIndex.toString(), 25, y);
+            doc.text(item.name.substring(0, 18), 50, y);
+            doc.text(item.qty.toString(), 125, y);
+            doc.text("₹" + item.subtotal, 150, y);
+            y += 7;
+        }
+        
+        if(page === totalPages - 1) {
+            let subtotal = totalAmount;
+            let gst = Math.round(totalAmount * 0.18);
+            let grandTotal = subtotal + gst;
+            
+            y += 10;
+            doc.setFillColor(240, 248, 255);
+            doc.roundedRect(20, y, 170, 55, 3, 3, 'F');
+            
+            doc.setFontSize(10);
+            doc.setTextColor(0, 0, 0);
+            doc.setFont("helvetica", "bold");
+            doc.text(" PAYMENT SUMMARY", 70, y + 8);
+            
+            doc.setFont("helvetica", "normal");
+            doc.text("Subtotal:", 30, y + 18);
+            doc.text("GST (18%):", 30, y + 28);
+            doc.text("Grand Total:", 30, y + 38);
+            doc.text("Payment Status:", 30, y + 48);
+            
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(0, 150, 0);
+            doc.text("₹" + subtotal, 100, y + 18);
+            doc.setTextColor(255, 140, 0);
+            doc.text("₹" + gst, 100, y + 28);
+            doc.setTextColor(0, 0, 255);
+            doc.text("₹" + grandTotal, 100, y + 38);
+            doc.setTextColor(0, 150, 0);
+            doc.text("PAID ✅", 100, y + 48);
+            
+            y += 65;
+        } else {
+            y += 15;
+            doc.setFontSize(9);
+            doc.setTextColor(255, 0, 0);
+            doc.text("→ Continued on next page...", 70, y);
+            y += 10;
+        }
+        
+        doc.setDrawColor(255, 215, 0);
+        doc.line(20, y, 190, y);
+        
+        doc.setFontSize(8);
+        doc.setTextColor(150, 150, 150);
+        doc.text("This is a computer generated receipt - Valid without signature", 30, y + 8);
+        
+        if(page === totalPages - 1) {
+            doc.text("Thank you for dining at Hotel Royal Stay!", 45, y + 15);
+            doc.text("Visit Again!", 80, y + 22);
+            
+            doc.setFillColor(0, 0, 0);
+            doc.rect(160, y - 5, 20, 20, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(6);
+            doc.text("Scan for", 165, y + 3);
+            doc.text("Feedback", 167, y + 8);
+        } else {
+            doc.text(`Continued on page ${currentPage + 1}...`, 70, y + 15);
+        }
+    }
+    
+    doc.save("Hotel_Royal_Stay_Restaurant_Bill.pdf");
+    showNotification("Bill downloaded successfully!", 'success');
+}
+
 // ========== LOGIN / REGISTER SYSTEM ==========
 let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
 
-// Modal Functions
 function openLoginModal() {
     document.getElementById('loginModal').style.display = 'flex';
     document.body.style.overflow = 'hidden';
@@ -753,7 +1049,6 @@ function switchTab(tab) {
     }
 }
 
-// Register Function
 function register() {
     let name = document.getElementById('regName').value;
     let email = document.getElementById('regEmail').value;
@@ -799,7 +1094,6 @@ function register() {
     document.getElementById('regPassword').value = '';
 }
 
-// Login Function
 function login() {
     let email = document.getElementById('loginEmail').value;
     let password = document.getElementById('loginPassword').value;
@@ -823,7 +1117,6 @@ function login() {
     }
 }
 
-// Update UI after login
 function updateUIAfterLogin() {
     if(currentUser) {
         document.getElementById('loginBtn').style.display = 'none';
@@ -834,13 +1127,11 @@ function updateUIAfterLogin() {
     }
 }
 
-// Show user menu
 function showUserMenu() {
     let menu = document.getElementById('userMenu');
     menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
 }
 
-// Logout
 function logout() {
     currentUser = null;
     localStorage.removeItem('currentUser');
@@ -849,7 +1140,6 @@ function logout() {
     showNotification('लॉगआउट यशस्वी!', 'info');
 }
 
-// Forgot Password
 function forgotPassword() {
     let email = prompt('तुमचा नोंदणीकृत ईमेल प्रविष्ट करा:');
     if(email) {
@@ -1064,21 +1354,6 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
-// ========== SLIDER ==========
-let sliders = document.querySelectorAll(".slider");
-
-sliders.forEach(slider=>{
-    let slides = slider.querySelectorAll(".slide");
-    let index = 0;
-
-    setInterval(()=>{
-        slides.forEach(s=>s.classList.remove("active"));
-        index++;
-        if(index>=slides.length){ index=0; }
-        slides[index].classList.add("active");
-    },1800);
-});
-
 // ========== OFFER NOTIFICATION ==========
 setTimeout(() => {
     if(!localStorage.getItem('offerShown')) {
@@ -1135,7 +1410,6 @@ window.onclick = function(event) {
         closeModal();
     }
     
-    // Close user menu when clicking outside
     if(!event.target.closest('#userProfile')) {
         document.getElementById('userMenu').style.display = 'none';
     }
